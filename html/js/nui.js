@@ -1,9 +1,15 @@
 const doc = document
 
-window.addEventListener('load', () => {
+const exitId = doc.getElementById('exit')
+
+window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter')
-    } catch (error) {
-        console.log('error: ' + error)
+    } catch (e) {
+        console.log('error: ' + e)
     }
+})
+
+exitId.addEventListener('click', ()=> {
+    console.log('a')
 })
