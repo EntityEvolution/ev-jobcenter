@@ -25,9 +25,20 @@ RegisterNUICallback('close', function()
     if isOpen then
         isOpen = false
         SetNuiFocus(false, false)
-        TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456)
+        local location = stNoti()
+        TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456, location)
     end
 end)
+
+function stNoti()
+    local stName = 'Not found'
+    local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
+    local stHash = GetStreetNameAtCoord(x, y, z)
+    if (stHash ~= nil) then
+        stName = GetStreetNameFromHashKey(stHash)
+        return stName
+    end
+end
 
 -- Commands
 RegisterCommand(Config.openCommand, function()

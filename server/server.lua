@@ -1,7 +1,7 @@
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, webhook, title, message, image, thumbnail, color)
+RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, webhook, title, message, image, thumbnail, color, location)
     local source <const> = source
     xPlayer = ESX.GetPlayerFromId(source)
     if xPlayer then
@@ -15,7 +15,7 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, webhook, title, m
             "```\n __Job Information__\n```Character Name: " .. xPlayer.getName() .. "\nCharacter Job: " .. xPlayer.getJob().label ..
             "\nCharacter Job Rank: " .. xPlayer.getJob().grade_label .. "\nCharacter Sex: "
             .. xPlayer.get('sex') .. "\nCharacter DOB: " .. xPlayer.get('dateofbirth') .. "\nCharacter Height: " .. xPlayer.get('height') ..
-            "in```" .. "\n __About__\n```Reason: " .. message .. "```",
+            "in```" .. "\n __About__\n```Reason: " .. message .. "\nLocation: " .. location .. "```",
             image,
             thumbnail,
             color)
