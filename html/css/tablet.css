@@ -1,0 +1,9 @@
+@font-face {
+    font-family: def;
+    src: url();
+    font-display: swap;
+}
+
+body {
+    overflow: hidden;
+}
