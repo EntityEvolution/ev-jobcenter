@@ -25,6 +25,7 @@ RegisterNUICallback('close', function()
     if isOpen then
         isOpen = false
         SetNuiFocus(false, false)
+        TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456)
     end
 end)
 
@@ -44,7 +45,7 @@ end)
 RegisterKeyMapping(Config.openCommand, Config.openDesc, 'keyboard', Config.openKey)
 
 -- Polyzones
-local jobCenter = PolyZone:Create({
+local jobCenter <const> = PolyZone:Create({
     vector2(-260.07339477539, -967.36651611328),
     vector2(-265.25463867188, -969.923828125),
     vector2(-269.91510009766, -960.05834960938),
@@ -56,7 +57,8 @@ local jobCenter = PolyZone:Create({
     lazyGrid = true,
     debugPoly = false
 })
-  
+
+-- Polyzones check
 jobCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
     if isPointInside then
         if not insidePoly then

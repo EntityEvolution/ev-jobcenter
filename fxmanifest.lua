@@ -9,13 +9,14 @@ description 'A simple ESX job center created by Entity Evolution'
 version '0.0.1'
 
 client_scripts {
-    'config/config.lua',
+    'config/config_cl.lua',
     '@PolyZone/client.lua',
 	'@PolyZone/ComboZone.lua',
     'client/*.lua'
 }
 
 server_scripts {
+    'config/config_sv.lua',
     'server/*.lua'
 }
 
