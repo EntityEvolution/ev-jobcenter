@@ -3,8 +3,10 @@ local PlayerPedId = PlayerPedId
 local GetEntityCoords = GetEntityCoords
 
 local isOpen = false
-local insidePoly = false
-local startNoti = false
+local insidePoly, startNoti = false, false
+
+local dict, anim = 'amb@world_human_seat_wall_tablet@female@base', 'base'
+local model = GetHashKey('prop_cs_tablet')
 
 ESX = nil
 CreateThread(function()
@@ -27,18 +29,9 @@ RegisterNUICallback('close', function()
         SetNuiFocus(false, false)
         local location = stNoti()
         TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456, location)
+        stopAnim()
     end
 end)
-
-function stNoti()
-    local stName = 'Not found'
-    local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
-    local stHash = GetStreetNameAtCoord(x, y, z)
-    if (stHash ~= nil) then
-        stName = GetStreetNameFromHashKey(stHash)
-        return stName
-    end
-end
 
 -- Commands
 RegisterCommand(Config.openCommand, function()
@@ -49,6 +42,7 @@ RegisterCommand(Config.openCommand, function()
                 action = 'open'
             })
             SetNuiFocus(true, true)
+            startAnim()
         end
     end
 end)
@@ -127,10 +121,51 @@ function showNoti()
     end
 end
 
-ShowFloatingHelpNotification = function(message, coords)
+function ShowFloatingHelpNotification(message, coords)
     AddTextEntry('FloatingHelpNotification', message)
     SetFloatingHelpTextWorldPosition(1, coords)
     SetFloatingHelpTextStyle(1, 1, 2, -1, 3, 0)
     BeginTextCommandDisplayHelp('FloatingHelpNotification')
     EndTextCommandDisplayHelp(2, false, false, -1)
+end
+
+function stNoti()
+    local stName = 'Not found'
+    local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
+    local stHash = GetStreetNameAtCoord(x, y, z)
+    if (stHash ~= nil) then
+        stName = GetStreetNameFromHashKey(stHash)
+        return stName
+    end
+end
+
+function startAnim()
+    local ped = PlayerPedId()
+	RequestModel(model)
+	while not HasModelLoaded(model) do
+		Wait(10)
+	end
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Wait(10)
+    end
+    
+    local bone = GetPedBoneIndex(ped, 57005)
+    prop = CreateObject(model, 1.0, 1.0, 1.0, 1, 1, 0)
+	if isUnarmed then
+		SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
+        AttachEntityToEntity(prop, ped, bone, 0.17, 0.10, -0.13, 20.0, 180.0, 180.0, 1, 1, 0, 1, 1, 1)
+	else
+        AttachEntityToEntity(prop, ped, bone, 0.17, 0.10, -0.13, 20.0, 180.0, 180.0, 1, 1, 0, 1, 1, 1)
+	end
+	TaskPlayAnim(ped, dict, anim, 2.0, -1, -1, 50, 0, false, false, false)
+end
+
+function stopAnim()
+    if (prop ~= 0) then
+        local ped = PlayerPedId()
+		DeleteEntity(prop)
+		StopAnimTask(ped, dict, anim, 1.0)
+		prop = 0
+    end
 end
