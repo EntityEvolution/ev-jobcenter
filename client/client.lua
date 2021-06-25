@@ -28,8 +28,6 @@ RegisterNUICallback('close', function()
     end
 end)
 
-
-
 -- Commands
 RegisterCommand(Config.openCommand, function()
     if insidePoly then
@@ -53,25 +51,22 @@ local jobCenter = PolyZone:Create({
     vector2(-265.19049072266, -957.45562744141)
 }, {
     name="jobcenter",
-    minZ = 31.223127365112,
-    maxZ = 31.22501373291,
+    minZ = 30.223127365112,
+    maxZ = 32.02501373291,
     lazyGrid = true,
     debugPoly = false
 })
-  
   
 jobCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
     if isPointInside then
         if not insidePoly then
             insidePoly = true
             startNoti = true
-            print('in')
             showNoti()
         end
     else
         if insidePoly then
             insidePoly = false
-            print('out')
             showNoti()
         end
     end
