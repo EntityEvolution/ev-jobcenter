@@ -5,7 +5,10 @@ window.addEventListener('message', (e) => {
             break;
 
         case 'time':
-            doc.getElementById('tablet-time').innerHTML = e.data.time
+            doc.getElementById('tablet-time').innerHTML = e.data.time;
+            doc.getElementById('tablet-day').innerHTML = e.data.day;
+            doc.getElementById('tablet-day-text').innerHTML = e.data.dayText;
+            doc.getElementById('tablet-month').innerHTML = e.data.month;
             break;
     }
 })
