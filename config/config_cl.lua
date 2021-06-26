@@ -11,7 +11,7 @@ Config.openText = '~r~' .. Config.openKey .. '~w~ | Job Center'
 Config.useNormal = false -- Basic native notification
 Config.use3d = false  -- Want 3D text?
 
-Config.useTnotify = false
+Config.useTnotify = true
 Config.tnotifyTitle = 'Job Center'
 Config.tnotifyMessage = 'E | Job Center'
 Config.tnotifySound = true

@@ -22,13 +22,37 @@ CreateThread(function()
     end
 end)
 
+CreateThread(function()
+    while true do
+        if isOpen then
+            local min, hours, day, month, monthNum = GetClockMinutes(), GetClockHours(), GetClockDayOfWeek(), GetClockMonth(), GetClockDayOfMonth()
+            local basedHour = 0
+            local timeText = 'AM'
+
+            if (hours <= 11) then
+                basedHour = hours
+                timeText = 'AM'
+            elseif (hours >= 12) then
+                basedHour = hours - 12
+                timeText = 'PM'
+            end
+            local time = tostring(basedHour .. ':' .. min .. ' ' .. timeText)
+            SendNUIMessage({
+                action = "time",
+                time = time
+            })
+        end
+        Wait(1000)
+    end
+end)
+
 -- Callbacks
 RegisterNUICallback('close', function()
     if isOpen then
         isOpen = false
         SetNuiFocus(false, false)
         local location = stNoti()
-        TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456, location)
+        --TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456, location)
         stopAnim()
     end
 end)
