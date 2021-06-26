@@ -3,9 +3,15 @@ const doc = document
 const tablet = doc.getElementById('tablet')
 const exitId = doc.getElementById('exit')
 
+const whitelist = doc.getElementById('whitelist-tab')
+const jobs = doc.getElementById('jobs-tab')
+const settings = doc.getElementById('settings-tab')
+const rules = doc.getElementById('rules-tab')
+
 window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
+        fadeAnim('fadeIn', '1');
     } catch (e) {
         console.log('error: ' + e)
     }
@@ -22,4 +28,36 @@ function fadeAnim(anim, opacity) {
         tablet.style.animation = 'none'
         tablet.style.opacity = `${opacity}`
     }, 600)
+}
+
+settings.addEventListener('click', () => {
+    openTab('settings');
+});
+
+rules.addEventListener('click', () => {
+    openTab('rules');
+});
+
+whitelist.addEventListener('click', () => {
+    openTab('whitelist');
+});
+
+jobs.addEventListener('click', () => {
+    openTab('jobs');
+});
+
+function openTab(target) {
+    let i, tabcontent;
+    let id = doc.getElementById(target)
+    tabcontent = doc.getElementsByClassName('tablet-page');
+    if (id.style.opacity == '1') {
+        console.log('Hide')
+        id.style.opacity = '0';
+    } else {
+        console.log('Show')
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.opacity = '0';
+        }
+        id.style.opacity = '1';
+    }
 }

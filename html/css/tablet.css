@@ -4,6 +4,10 @@
     font-display: swap;
 }
 
+:root {
+    --white: #e4e4e4;
+}
+
 body {
     overflow: hidden;
 }
@@ -56,6 +60,33 @@ body {
     border-radius: 12px;
 }
 
+.tablet-page {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background-color: #2c2c2c;
+}
+
+.whitelist {
+    background-color: rgb(0, 72, 255);
+}
+
+.jobs {
+    background-color: rgb(17, 255, 0);
+}
+
+.rules {
+    background-color: rgb(255, 225, 0);
+}
+
+.settings {
+    background-color: red;
+}
+
+
 .tablet-date-container {
     position: absolute;
     display: flex;
@@ -70,7 +101,7 @@ body {
 
 .tablet-date {
     position: relative;
-    color: #e4e4e4;
+    color: var(--white);
 
     font-size: 0.6vw;
     font-family: def;
@@ -102,12 +133,25 @@ body {
 
 .tablet-app {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 8vh;
     height: 8vh;
 
     border: hidden;
     border-radius: 2vh;
     margin: 2.5vh;
+    background-color: var(--white);
+    z-index: 3;
+    
+    cursor: pointer;
+}
+
+.tablet-app-img {
+    position: relative;
+    width: 5vh;
+    height: 5vh;
 }
 
 .tablet-exit {
@@ -120,7 +164,7 @@ body {
     height: 0.7%;
 
     border-radius: 2vh;
-    background-color: #e4e4e4;
+    background-color: var(--white);
     transition: 0.3s;
     z-index: 3;
 }
