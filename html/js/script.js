@@ -1,7 +1,7 @@
 window.addEventListener('message', (e) => {
     switch (e.data.action) {
         case 'show':
-
+            tablet.style.animation
             break;
     }
 })

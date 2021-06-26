@@ -12,16 +12,27 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
 }
 
 .container {
     position: relative;
-    background-color: rgb(99, 0, 0);
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
 }
 
 .tablet-img {
