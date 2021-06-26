@@ -47,15 +47,35 @@ body {
     width: 125vh;
     height: 85%;
     border-radius: 12px;
-    background-color: #DBDBDB;
 }
 
 .tablet-background {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 12px;
-    background-color: #DBDBDB;
+}
+
+.tablet-apps {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 5%;
+    left: 0%;
+
+    width: 100%;
+    height: 12%;
+}
+
+.tablet-apps-container {
+    display: flex;
+    position: relative;
+
+    width: 60%;
+    height: 100%;
+    background-color: #ffffff4f;
+    border-radius: 3vh;
 }
 
 .tablet-exit {
