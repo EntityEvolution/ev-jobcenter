@@ -57,11 +57,10 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 1vh;
 }
 
 .tablet-page {
-    display: block;
     opacity: 0;
     position: absolute;
     width: 100%;
@@ -71,21 +70,24 @@ body {
 }
 
 .whitelist {
+    transition: 0.2s;
     background-color: rgb(0, 72, 255);
 }
 
 .jobs {
+    transition: 0.2s;
     background-color: rgb(17, 255, 0);
 }
 
 .rules {
+    transition: 0.2s;
     background-color: rgb(255, 225, 0);
 }
 
 .settings {
+    transition: 0.2s;
     background-color: red;
 }
-
 
 .tablet-date-container {
     position: absolute;
@@ -146,6 +148,45 @@ body {
     z-index: 3;
     
     cursor: pointer;
+}
+
+.app-tooltip {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 16vh;
+    left: -50%;
+    top: -90%;
+
+    border-radius: 1vh;
+    padding: 1vh 0;
+
+    opacity: 0;
+    transition: 0.2s;
+
+    background-color: #a7a7a77c;
+    color: #fff;
+    font-family: def;
+    font-size: 1.5vh;
+}
+
+.app-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    margin-left: -1vh;
+    border-width: 1vh;
+    border-style: solid;
+    border-color: #a7a7a78a transparent transparent transparent;
+}
+
+.tablet-app:hover .app-tooltip {
+    opacity: 1;
 }
 
 .tablet-app-img {

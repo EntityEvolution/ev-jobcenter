@@ -51,13 +51,23 @@ function openTab(target) {
     let id = doc.getElementById(target)
     tabcontent = doc.getElementsByClassName('tablet-page');
     if (id.style.opacity == '1') {
-        console.log('Hide')
         id.style.opacity = '0';
     } else {
-        console.log('Show')
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.opacity = '0';
         }
         id.style.opacity = '1';
     }
+}
+const fetchNUI = async(cbname, data)=> {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    };
+    const resp = await fetch(`https://monitor/${cbname}`, options);
+
+    return await resp.json();
 }
