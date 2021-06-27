@@ -52,7 +52,7 @@ CreateThread(function()
 end)
 
 -- Callbacks
-RegisterNUICallback('close', function()
+RegisterNUICallback('close', function(_, cb)
     if isOpen then
         isOpen = false
         SetNuiFocus(false, false)
@@ -60,18 +60,21 @@ RegisterNUICallback('close', function()
         --TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456, location)
         stopAnim()
     end
+    cb({})
 end)
 
 -- Commands
 RegisterCommand(Config.openCommand, function()
     if insidePoly then
         if not isOpen then
-            isOpen = true
-            SendNUIMessage({
-                action = 'open'
-            })
-            SetNuiFocus(true, true)
-            startAnim()
+            if not IsEntityDead(PlayerPedId()) then
+                isOpen = true
+                SendNUIMessage({
+                    action = 'open'
+                })
+                SetNuiFocus(true, true)
+                startAnim()
+            end
         end
     end
 end)

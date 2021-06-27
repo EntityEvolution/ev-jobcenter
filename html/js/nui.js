@@ -11,15 +11,15 @@ const rules = doc.getElementById('rules-tab')
 window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
-        fadeAnim('fadeIn', '1');
+        //fadeAnim('fadeIn', '1');
     } catch (e) {
         console.log('error: ' + e)
     }
 })
 
 exitId.addEventListener('click', ()=> {
-    fadeAnim('fadeOut', '0')
-    $.post('https://ev-jobcenter-esx/close')
+    fadeAnim('fadeOut', '0');
+    fetchNUI('close', 'cb');
 })
 
 function fadeAnim(anim, opacity) {
@@ -59,6 +59,7 @@ function openTab(target) {
         id.style.opacity = '1';
     }
 }
+
 const fetchNUI = async(cbname, data)=> {
     const options = {
         method: 'POST',
@@ -67,7 +68,7 @@ const fetchNUI = async(cbname, data)=> {
         },
         body: JSON.stringify(data)
     };
-    const resp = await fetch(`https://monitor/${cbname}`, options);
+    const resp = await fetch(`https://ev-jobcenter-esx/${cbname}`, options);
 
     return await resp.json();
 }

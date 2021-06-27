@@ -16,7 +16,7 @@ window.addEventListener('message', (e) => {
 // Hide when escape is pressed
 doc.onkeyup = (event) => {
     if (event.key == 'Escape') {
-        fadeAnim('fadeOut', '0')
-        $.post('https://ev-jobcenter-esx/close');
+        fadeAnim('fadeOut', '0');
+        fetchNUI('close', 'cb');
     }
 }
