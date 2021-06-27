@@ -8,10 +8,14 @@ const jobs = doc.getElementById('jobs-tab')
 const settings = doc.getElementById('settings-tab')
 const rules = doc.getElementById('rules-tab')
 
+const background = doc.getElementById('background-tab')
+const apps = doc.getElementById('apps-tab')
+
 window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
         fadeAnim('fadeIn', '1');
+        background.click();
     } catch (e) {
         console.log('error: ' + e)
     }
@@ -21,6 +25,16 @@ exitId.addEventListener('click', ()=> {
     fadeAnim('fadeOut', '0');
     fetchNUI('close', 'cb');
 })
+
+background.addEventListener('click', () => {
+    background.style.borderBottom = '0.3vh solid #258ef0';
+    apps.style.borderBottom = 'none';
+});
+
+apps.addEventListener('click', () => {
+    background.style.borderBottom = '';
+    apps.style.borderBottom = '0.3vh solid #258ef0';
+});
 
 function fadeAnim(anim, opacity) {
     tablet.style.animation = `${anim} 1s forwards`;
