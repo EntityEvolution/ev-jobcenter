@@ -11,7 +11,7 @@ const rules = doc.getElementById('rules-tab')
 window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
-        //fadeAnim('fadeIn', '1');
+        fadeAnim('fadeIn', '1');
     } catch (e) {
         console.log('error: ' + e)
     }
