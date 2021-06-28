@@ -100,7 +100,7 @@ body {
     height: 4vh;
 
     transform: translate(-50%);
-    filter: invert(1);
+    filter: invert(0.80);
 }
 
 .settings-tabs {
@@ -113,14 +113,57 @@ body {
     border-top-right-radius: 1.8vh;
     border-top-left-radius: 1.8vh;
     z-index: 5;
-}
 
-.settings-tab {
     color: var(--white);
     cursor: pointer;
     transition: 0.5s;
 
     font-size: 0.8vw;
+    font-family: def;
+}
+
+.settings-page {
+    position: absolute;
+
+    height: 85%;
+    width: 100%;
+    opacity: 0;
+
+    border-top: 0.4vh solid #353e55;
+    border-bottom-right-radius: 1.8vh;
+    border-bottom-left-radius: 1.8vh;
+}
+
+.settings-subt {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    
+    color: var(--white);
+    text-decoration: underline #258ef0;
+
+    font-size: 1.1vw;
+    font-family: def;
+}
+
+.settings-selection {
+    position: relative;
+    left: 25%;
+    width: 50%;
+    height: 5vh;
+
+    border-radius: 1vh;
+    border: none;
+
+    z-index: 1;
+    background-color: #2678c0;
+    color: var(--white);
+    cursor: pointer;
+    transition: 0.5s;
+
+    font-size: 0.9vw;
     font-family: def;
 }
 
@@ -179,7 +222,7 @@ body {
     border: hidden;
     border-radius: 2vh;
     margin: 2.5vh;
-    background-color: var(--white);
+    background-color: #dbdbdb;
     z-index: 3;
     
     cursor: pointer;

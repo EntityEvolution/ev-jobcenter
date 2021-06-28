@@ -1,0 +1,21 @@
+[
+    {
+        "title" : "Default",
+        "background" : "../html/img/tablet/default.jpg"
+    },
+
+    {
+        "title" : "Anime",
+        "background" : "../html/img/tablet/background2.jpg"
+    },
+
+    {
+        "title" : "Club Penguin",
+        "background" : "../html/img/tablet/background3.jpg"
+    },
+
+    {
+        "title" : "Custom URL",
+        "background" : "url"
+    }
+]
