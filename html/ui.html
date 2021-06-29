@@ -10,7 +10,7 @@
 
     <!--CSS and images links-->
     <link rel="stylesheet" href="./css/tablet.css">
-
+    <style>#url-link {display: none;}</style>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
             <img class="tablet-img" src="./img/tablet/tablet.png" alt="tablet">
         </div>
         <div class="tablet-wrapper">
-            <img id="tablet-background" class="tablet-background" src="./img/tablet/default.jpg" alt="Background">
+            <img id="tablet-background" class="tablet-background" src="./img/backgrounds/default.jpg" alt="Background">
             <div id="whitelist" class="tablet-page whitelist">
                 
             </div>
@@ -30,7 +30,6 @@
                 
             </div>
             <div id="settings" class="tablet-page settings">
-                <img class="settings-img" src="./img/apps/settings.png" alt="Settings">
                 <div class="settings-tabs">
                     <span id="background-tab" class="settings-tab">Background</span>
                     <span id="apps-tab" class="settings-tab">Apps</span>
@@ -41,6 +40,15 @@
                         <optgroup label="Pick a background">
                         </optgroup>
                     </select>
+                    <div id="url-link">
+                        <span class="settings-subt">URL Link</span>
+                        <input id="url" class="settings-url" placeholder="https://link.jpg">
+                        <div class="settings-buttons-container">
+                            <button id="accept" class="settings-buttons accept">Accept</button>
+                            <button id="cancel" class="settings-buttons cancel">Cancel</button>
+                        </div>
+                    </div>
+                    <button class="settings-save">Save settings</button>
                 </div>
                 <div id="apps-page" class="settings-page">
                     <span>b</span>
@@ -72,7 +80,7 @@
                     </button>
                 </div>
             </div>
-            <span id="exit" class="tablet-exit"></spam>
+            <span id="exit" class="tablet-exit"></span>
         </div>
     </div>
 

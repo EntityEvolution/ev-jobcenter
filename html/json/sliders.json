@@ -1,17 +1,17 @@
 [
     {
         "title" : "Default",
-        "background" : "../html/img/tablet/default.jpg"
+        "background" : "../html/img/backgrounds/default.jpg"
     },
 
     {
         "title" : "Anime",
-        "background" : "../html/img/tablet/background2.jpg"
+        "background" : "../html/img/backgrounds/background2.jpg"
     },
 
     {
         "title" : "Club Penguin",
-        "background" : "../html/img/tablet/background3.jpg"
+        "background" : "../html/img/backgrounds/background3.jpg"
     },
 
     {

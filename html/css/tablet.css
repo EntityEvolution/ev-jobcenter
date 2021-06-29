@@ -86,21 +86,10 @@ body {
     top: 15%;
     right: 10%;
     width: 30%;
-    height: 60%;
+    height: 28%;
     opacity: 1;
 
     background-color: #2b313f;
-}
-
-.settings-img {
-    position: absolute;
-    left: 50%;
-    top: -5%;
-    width: 4vh;
-    height: 4vh;
-
-    transform: translate(-50%);
-    filter: invert(0.80);
 }
 
 .settings-tabs {
@@ -108,7 +97,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 15%;
+    height: 6vh;
 
     border-top-right-radius: 1.8vh;
     border-top-left-radius: 1.8vh;
@@ -118,7 +107,7 @@ body {
     cursor: pointer;
     transition: 0.5s;
 
-    font-size: 0.8vw;
+    font-size: 1.0vw;
     font-family: def;
 }
 
@@ -150,7 +139,8 @@ body {
 
 .settings-selection {
     position: relative;
-    left: 25%;
+    left: 50%;
+    transform: translate(-50%);
     width: 50%;
     height: 5vh;
 
@@ -161,10 +151,95 @@ body {
     background-color: #2678c0;
     color: var(--white);
     cursor: pointer;
-    transition: 0.5s;
 
     font-size: 0.9vw;
     font-family: def;
+}
+
+.settings-url {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+    height: 5vh;
+
+    border-radius: 1vh;
+    border: 0vh;
+
+    z-index: 1;
+    background-color: #2678c0;
+    color: var(--white);
+    cursor: pointer;
+
+    font-size: 0.9vw;
+    font-family: def;
+    text-align: center;
+}
+
+.settings-url::placeholder {
+    color: #b1b1b1;
+    opacity: 1;
+}
+
+.settings-buttons-container {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    top: 4%;
+}
+
+.settings-buttons {
+    position: relative;
+    width: 40%;
+    height: 4.5vh;
+    margin-top: 3%;
+
+    border-radius: 0.5vh;
+    border: 0vh;
+    z-index: 1;
+    background-color: #2678c0;
+    color: var(--white);
+    cursor: pointer;
+
+    font-size: 0.9vw;
+    font-family: def;
+    text-align: center;
+}
+
+.accept {
+    background-color: #65aa20;
+}
+
+.cancel {
+    background-color: #ad0e2e;
+}
+
+.settings-save {
+    position: relative;
+    width: 80%;
+    height: 4.5vh;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3%;
+
+    border-radius: 0.5vh;
+    border: 0vh;
+    z-index: 1;
+    background-color: #2678c0;
+    color: var(--white);
+    cursor: pointer;
+
+    font-size: 0.9vw;
+    font-family: def;
+    text-align: center;
+}
+
+.settings-url:hover,
+.settings-selection:hover,
+.settings-buttons:hover
+.settings-save:hover {
+    border: 0.1vh solid white;
 }
 
 .tablet-date-container {

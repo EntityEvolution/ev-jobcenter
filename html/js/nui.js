@@ -10,6 +10,8 @@ const rules = doc.getElementById('rules-tab')
 
 const background = doc.getElementById('background-tab')
 const apps = doc.getElementById('apps-tab')
+const accept = doc.getElementById('accept')
+const cancel = doc.getElementById('cancel')
 
 window.addEventListener('load', ()=> {
     try {
@@ -37,6 +39,10 @@ apps.addEventListener('click', () => {
     apps.style.borderBottom = '0.3vh solid #258ef0';
     openTab('apps-page', 'settings-page', true);
 });
+
+accept.addEventListener('click', (e) => {
+    console.log(doc.getElementById('url').value)
+})
 
 // Apps
 settings.addEventListener('click', () => {
@@ -98,8 +104,6 @@ const fetchNUI = async(cbname, data)=> {
     return await resp.json();
 }
 
-
-
 window.addEventListener(`DOMContentLoaded`, () => {
     fetch(`../html/json/sliders.json`)
         .then((response) => response.json())
@@ -111,16 +115,24 @@ window.addEventListener(`DOMContentLoaded`, () => {
         });
 })
 
+let urlActive = false;
 function createOptions(data) {
 	const selection = doc.getElementById('settings-selection');
     const tabletBack = doc.getElementById('tablet-background')
     selection.addEventListener(`change`, ()=> {
         if (selection.value == 'url') {
-            console.log('Custom URL')
+            urlActive = true;
+            doc.getElementById('url-link').style.display = 'block'
+            doc.getElementById('settings').style.height = '48%'
         } else {
+            if (urlActive) {
+                urlActive = false;
+                doc.getElementById('url-link').style.display = 'none'
+                doc.getElementById('settings').style.height = '28%'
+            }
             tabletBack.src = selection.value
         }
-    })
+    });
 	data.forEach(dataItem => {
 		const option = doc.createElement('option');
 		option.text = dataItem.title;
