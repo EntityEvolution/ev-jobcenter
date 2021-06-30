@@ -1,7 +1,5 @@
 const doc = document
 
-let urlActive = false;
-
 const tablet = doc.getElementById('tablet')
 const exitId = doc.getElementById('exit')
 
@@ -17,11 +15,14 @@ const cancel = doc.getElementById('cancel')
 const urlLink = doc.getElementById('url')
 const save = doc.getElementById('save-back')
 
+let urlActive = false;
+
 window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
         fadeAnim('fadeIn', '1');
         background.click();
+        apps.click()
         doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
     } catch (e) {
         console.log('error: ' + e)
@@ -37,12 +38,17 @@ background.addEventListener('click', ()=> {
     background.style.borderBottom = '0.3vh solid #258ef0';
     apps.style.borderBottom = 'none';
     openTab('background-page', 'settings-page', true);
+    doc.getElementById('url-link').style.display = 'none';
+    doc.getElementById('settings').style.height = '28%';
+    doc.getElementById('settings-selection').value = 'default';
 });
 
 apps.addEventListener('click', ()=> {
     background.style.borderBottom = '';
     apps.style.borderBottom = '0.3vh solid #258ef0';
     openTab('apps-page', 'settings-page', true);
+    doc.getElementById('url-link').style.display = 'block'
+    doc.getElementById('settings').style.height = '40%'
 });
 
 accept.addEventListener('click', ()=> {
