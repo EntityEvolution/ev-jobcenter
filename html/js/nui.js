@@ -1,5 +1,7 @@
 const doc = document
 
+let urlActive = false;
+
 const tablet = doc.getElementById('tablet')
 const exitId = doc.getElementById('exit')
 
@@ -12,12 +14,15 @@ const background = doc.getElementById('background-tab')
 const apps = doc.getElementById('apps-tab')
 const accept = doc.getElementById('accept')
 const cancel = doc.getElementById('cancel')
+const urlLink = doc.getElementById('url')
+const save = doc.getElementById('save-back')
 
 window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
         fadeAnim('fadeIn', '1');
         background.click();
+        doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
     } catch (e) {
         console.log('error: ' + e)
     }
@@ -28,36 +33,50 @@ exitId.addEventListener('click', ()=> {
     fetchNUI('close', 'cb');
 })
 
-background.addEventListener('click', () => {
+background.addEventListener('click', ()=> {
     background.style.borderBottom = '0.3vh solid #258ef0';
     apps.style.borderBottom = 'none';
     openTab('background-page', 'settings-page', true);
 });
 
-apps.addEventListener('click', () => {
+apps.addEventListener('click', ()=> {
     background.style.borderBottom = '';
     apps.style.borderBottom = '0.3vh solid #258ef0';
     openTab('apps-page', 'settings-page', true);
 });
 
-accept.addEventListener('click', (e) => {
-    console.log(doc.getElementById('url').value)
+accept.addEventListener('click', ()=> {
+    let link = urlLink.value;
+    doc.getElementById('tablet-background').src = link;
+    urlLink.value = '';
+    doc.getElementById('url-link').style.display = 'none';
+    doc.getElementById('settings').style.height = '28%';
+    doc.getElementById('settings-selection').value = 'default';
 })
 
+cancel.addEventListener('click', ()=> {
+    urlLink.value = '';
+    doc.getElementById('url-link').style.display = 'none';
+    doc.getElementById('settings').style.height = '28%';
+    doc.getElementById('settings-selection').value = 'default';
+})
+
+save.addEventListener('click', ()=> localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src))
+
 // Apps
-settings.addEventListener('click', () => {
+settings.addEventListener('click', ()=> {
     openTab('settings', 'tablet-page');
 });
 
-rules.addEventListener('click', () => {
+rules.addEventListener('click', ()=> {
     openTab('rules', 'tablet-page');
 });
 
-whitelist.addEventListener('click', () => {
+whitelist.addEventListener('click', ()=> {
     openTab('whitelist', 'tablet-page');
 });
 
-jobs.addEventListener('click', () => {
+jobs.addEventListener('click', ()=> {
     openTab('jobs', 'tablet-page');
 });
 
@@ -115,7 +134,6 @@ window.addEventListener(`DOMContentLoaded`, () => {
         });
 })
 
-let urlActive = false;
 function createOptions(data) {
 	const selection = doc.getElementById('settings-selection');
     const tabletBack = doc.getElementById('tablet-background')

@@ -8,6 +8,10 @@
     --white: #e4e4e4;
 }
 
+*:focus {
+    outline: none;
+}
+
 body {
     overflow: hidden;
 }
@@ -50,7 +54,7 @@ body {
     position: absolute;
     width: 123vh;
     height: 86%;
-    border-radius: 12px;
+    border-radius: 1vh;
 }
 
 .tablet-background {
