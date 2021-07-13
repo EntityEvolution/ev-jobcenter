@@ -295,6 +295,11 @@ input:checked + .slider {
     background: #388eff;
 }
 
+.slider-img {
+    width: 6vh;
+    height: auto;
+}
+
 .tablet-date-container {
     position: absolute;
     display: flex;
