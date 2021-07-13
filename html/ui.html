@@ -29,6 +29,9 @@
             <div id="rules" class="tablet-page rules">
                 
             </div>
+            <div id="bugs" class="tablet-page rules">
+                
+            </div>
             <div id="settings" class="tablet-page settings">
                 <div class="settings-tabs">
                     <span id="background-tab" class="settings-tab">Background</span>
@@ -54,25 +57,25 @@
                     <div class="apps-container">
                         <label class="switch">
                             <input type="checkbox" checked>
-                            <span class="slider">
+                            <span id="whitelist-apps" class="slider">
                                 <img class="slider-img" src="./img/apps/glass.png">
                             </span>
                           </label>
                           <label class="switch">
                             <input type="checkbox" checked>
-                            <span class="slider">
+                            <span id="jobs-apps" class="slider">
                                 <img class="slider-img" src="./img/apps/suitcase.png">
                             </span>
                           </label>
                           <label class="switch">
                             <input type="checkbox" checked>
-                            <span class="slider">
+                            <span id="rules-apps" class="slider">
                                 <img class="slider-img" src="./img/apps/file.png">
                             </span>
                           </label>
                           <label class="switch">
                             <input type="checkbox">
-                            <span class="slider">
+                            <span id="bugs-apps" class="slider">
                                 <img class="slider-img" src="./img/apps/warning.png">
                             </span>
                           </label>
@@ -98,6 +101,10 @@
                     <button id="rules-tab" class="tablet-app">
                         <span class="app-tooltip">Rules</span>
                         <img class="tablet-app-img" src="./img/apps/file.png" alt="Settings">
+                    </button>
+                    <button style="display: none;" id="bugs-tab" class="tablet-app">
+                        <span class="app-tooltip">Bugs</span>
+                        <img class="tablet-app-img" src="./img/apps/warning.png" alt="Settings">
                     </button>
                     <button id="settings-tab" class="tablet-app">
                         <span class="app-tooltip">Settings</span>

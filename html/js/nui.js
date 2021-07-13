@@ -7,6 +7,7 @@ const whitelist = doc.getElementById('whitelist-tab')
 const jobs = doc.getElementById('jobs-tab')
 const settings = doc.getElementById('settings-tab')
 const rules = doc.getElementById('rules-tab')
+const bugs = doc.getElementById('bugs-tab')
 
 const background = doc.getElementById('background-tab')
 const apps = doc.getElementById('apps-tab')
@@ -16,6 +17,11 @@ const urlLink = doc.getElementById('url')
 const save = doc.getElementById('save-back')
 
 let urlActive = false;
+
+let actWhitelist = false;
+let actJobs = false;
+let actRules = false;
+let actBugs = true;
 
 window.addEventListener('load', ()=> {
     try {
@@ -29,6 +35,7 @@ window.addEventListener('load', ()=> {
     }
 })
 
+// Background tab
 exitId.addEventListener('click', ()=> {
     fadeAnim('fadeOut', '0');
     fetchNUI('close', 'cb');
@@ -69,23 +76,57 @@ cancel.addEventListener('click', ()=> {
 
 save.addEventListener('click', ()=> localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src))
 
+// Apps tab
+doc.getElementById('whitelist-apps').addEventListener('click', ()=> {
+    if (!actWhitelist) {
+        whitelist.style.display='none';
+        actWhitelist = true;
+    } else {
+        whitelist.style.display='flex';
+        actWhitelist = false;
+    }
+});
+
+doc.getElementById('jobs-apps').addEventListener('click', ()=> {
+    if (!actJobs) {
+        jobs.style.display='none';
+        actJobs = true;
+    } else {
+        jobs.style.display='flex';
+        actJobs = false;
+    }
+});
+
+doc.getElementById('rules-apps').addEventListener('click', ()=> {
+    if (!actRules) {
+        rules.style.display='none';
+        actRules = true;
+    } else {
+        rules.style.display='flex';
+        actRules = false;
+    }
+});
+
+doc.getElementById('bugs-apps').addEventListener('click', ()=> {
+    if (!actBugs) {
+        bugs.style.display='none';
+        actBugs = true;
+    } else {
+        bugs.style.display='flex';
+        actBugs = false;
+    }
+});
+
 // Apps
-settings.addEventListener('click', ()=> {
-    openTab('settings', 'tablet-page');
-});
+settings.addEventListener('click', ()=> openTab('settings', 'tablet-page'));
 
-rules.addEventListener('click', ()=> {
-    openTab('rules', 'tablet-page');
-});
+rules.addEventListener('click', ()=> openTab('rules', 'tablet-page'));
 
-whitelist.addEventListener('click', ()=> {
-    openTab('whitelist', 'tablet-page');
-});
+whitelist.addEventListener('click', ()=> openTab('whitelist', 'tablet-page'));
 
-jobs.addEventListener('click', ()=> {
-    openTab('jobs', 'tablet-page');
-});
+jobs.addEventListener('click', ()=> openTab('jobs', 'tablet-page'));
 
+bugs.addEventListener('click', ()=> openTab('bugs', 'tablet-page'));
 
 function openTab(target, className, settings) {
     let i, tabcontent;
@@ -125,12 +166,11 @@ const fetchNUI = async(cbname, data)=> {
         body: JSON.stringify(data)
     };
     const resp = await fetch(`https://ev-jobcenter-esx/${cbname}`, options);
-
     return await resp.json();
 }
 
 window.addEventListener(`DOMContentLoaded`, () => {
-    fetch(`../html/json/sliders.json`)
+    fetch(`../html/json/backgrounds.json`)
         .then((response) => response.json())
         .then((data) => {
             createOptions(data);

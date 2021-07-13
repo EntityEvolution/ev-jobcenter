@@ -10,6 +10,10 @@ window.addEventListener('message', (e) => {
             doc.getElementById('tablet-day-text').innerHTML = e.data.dayText;
             doc.getElementById('tablet-month').innerHTML = e.data.month;
             break;
+
+        case 'restoreData':
+
+            break;
     }
 })
 
