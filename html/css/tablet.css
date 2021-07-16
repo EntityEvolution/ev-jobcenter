@@ -83,7 +83,73 @@ body {
 }
 
 .rules {
-    background-color: rgb(255, 225, 0);
+    background-color: rgb(32, 36, 60);
+}
+
+.sidenav {
+    position: relative;
+    overflow-x: hidden;
+
+    height: 85%;
+    width: 20vh;
+    top: 5%;
+    left: 0;
+
+    font-family: def;
+    padding-top: 3vh;
+    z-index: 1;
+    border-right: 0.2vh solid #b1b1b1;
+}
+
+.sidenav-title {
+    position: relative;
+    font-size: 1vw;
+    font-family: def;
+    font-weight: 700;
+    text-decoration: underline;
+    text-align: center;
+    color: #818181;
+}
+
+.sidenav a, .dropdown-btn {
+    display: block;
+    padding: 1vh 1vh 0.8vh 2vh;
+    width: 100%;
+
+    font-size: 1vw;
+    font-family: def;
+    text-align: left;
+    color: #818181;
+
+    border: none;
+    background: none;
+    outline: none;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    font-size: 1vh;
+    padding: 0px 10px;
+}
+
+.active {
+    color: white;
+}
+  
+.index-container {
+    display: none;
+    padding-left: 1vh;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 0.1vw;
 }
 
 .settings {
@@ -91,7 +157,7 @@ body {
     right: 10%;
     width: 30%;
     height: 28%;
-    opacity: 1;
+    opacity: 0;
 
     background-color: #2b313f;
 }
