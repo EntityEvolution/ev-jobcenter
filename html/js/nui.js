@@ -27,7 +27,7 @@ window.addEventListener('load', ()=> {
     try {
         console.log('Started jobcenter');
         fadeAnim('fadeIn', '1');
-        background.click();
+        apps.click();
         rules.click();
         // Restore old tablet background //doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
     } catch (e) {
