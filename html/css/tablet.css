@@ -4,6 +4,18 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: def2;
+    src: url(../fonts/KumbhSans-Regular.ttf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: def2bold;
+    src: url(../fonts/KumbhSans-Bold.ttf);
+    font-display: swap;
+}
+
 :root {
     --white: #e4e4e4;
 }
@@ -231,6 +243,50 @@ body {
 
     font-size: 1.0vw;
     color: #dadada;
+}
+
+/* Bugs page */
+.bugs {
+    background-color: #ececec;
+}
+
+.bugs-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 1vh;
+    width: 100%;
+    height: 13%;
+    background-color: #e1e1e1;
+    border-bottom: 0.1vh solid #818181;
+}
+
+.bugs-nav-title {
+    margin-left: 5%;
+    font-size: 3.2vw;
+    font-family: def2bold;
+    font-weight: 700;
+
+    border-bottom: 0.3vh solid black;
+}
+
+.bugs-nav-title-img {
+    width: 8vh;
+    height: auto;
+}
+
+.bugs-nav-btn {
+    position: relative;
+    padding: 1.5vh 2vh;
+    margin-right: 3%;
+
+    background-color: #258ef0;
+    
+    font-family: def2;
+    font-size: 1vw;
+    border-radius: 1.2vh;
+    border: none;
 }
 
 /* Setttings page */
