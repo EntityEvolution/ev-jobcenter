@@ -107,7 +107,7 @@
                 <div class="bugs-nav-container">
                     <h2 class="bugs-nav-title">Report Form</h2>
                     <img class="bugs-nav-title-img" src="./img/apps/glass.png" alt="Find">
-                    <button class="bugs-nav-btn">Contact Administration</button>
+                    <button id="admin-btn" class="bugs-nav-btn">Contact Administration</button>
                 </div>
                 <div class="bugs-req-container">
                     <div class="bugs-req-header">
@@ -164,9 +164,19 @@
                         <input class="bugs-form-inp discord" placeholder="DiscordId#1234">
                         <p class="bugs-form-p">Issue/Suggestion</p>
                         <input class="bugs-form-inp" placeholder="Topic of your issue">
-                        <p class="bugs-form-p">Description about your topic</p>
-                        <input class="bugs-form-desc" placeholder="Description">
+                        <p class="bugs-form-p">Description</p>
+                        <input class="bugs-form-desc" placeholder="Description about your topic">
                         <button class="bugs-form-submit">Submit</button>
+                    </div>
+                </div>
+
+                <div id="bugs-question" class="bugs-question-wrapper">
+                    <div class="bugs-question-container">
+                        <p>Are you sure you want to continue?</p>
+                        <div class="bugs-question-btns">
+                            <button id="accept">Accept</button>
+                            <button id="cancel">Deny</button>
+                        </div>
                     </div>
                 </div>
 
@@ -208,8 +218,8 @@
                         <span class="settings-subt">URL Link</span>
                         <input id="url" class="settings-url" placeholder="https://link.jpg">
                         <div class="settings-buttons-container">
-                            <button id="accept" class="settings-buttons accept">Accept</button>
-                            <button id="cancel" class="settings-buttons cancel">Cancel</button>
+                            <button id="bugs-accept" class="settings-buttons accept">Accept</button>
+                            <button id="bugs-cancel" class="settings-buttons cancel">Cancel</button>
                         </div>
                     </div>
                     <button id="save-back" class="settings-save">Save settings</button>

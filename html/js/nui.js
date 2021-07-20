@@ -16,6 +16,9 @@ const cancel = doc.getElementById('cancel')
 const urlLink = doc.getElementById('url')
 const save = doc.getElementById('save-back')
 
+const admin = doc.getElementById('admin-btn')
+const bquest = doc.getElementById('bugs-question')
+
 let urlActive = false;
 
 let actWhitelist = false;
@@ -23,7 +26,7 @@ let actJobs = false;
 let actRules = false;
 let actBugs = true;
 
-window.addEventListener('load', ()=> {
+window.addEventListener('load', () => {
     try {
         console.log('Started jobcenter');
         fadeAnim('fadeIn', '1');
@@ -36,12 +39,12 @@ window.addEventListener('load', ()=> {
 })
 
 // Background tab
-exitId.addEventListener('click', ()=> {
+exitId.addEventListener('click', () => {
     fadeAnim('fadeOut', '0');
     fetchNUI('close', 'cb');
 })
 
-background.addEventListener('click', ()=> {
+background.addEventListener('click', () => {
     background.style.borderBottom = '0.3vh solid #258ef0';
     apps.style.borderBottom = 'none';
     openTab('background-page', 'settings-page', true);
@@ -50,7 +53,7 @@ background.addEventListener('click', ()=> {
     doc.getElementById('settings-selection').value = 'default';
 });
 
-apps.addEventListener('click', ()=> {
+apps.addEventListener('click', () => {
     background.style.borderBottom = '';
     apps.style.borderBottom = '0.3vh solid #258ef0';
     openTab('apps-page', 'settings-page', true);
@@ -58,7 +61,7 @@ apps.addEventListener('click', ()=> {
     doc.getElementById('settings').style.height = '40%'
 });
 
-accept.addEventListener('click', ()=> {
+accept.addEventListener('click', () => {
     let link = urlLink.value;
     doc.getElementById('tablet-background').src = link;
     urlLink.value = '';
@@ -67,66 +70,80 @@ accept.addEventListener('click', ()=> {
     doc.getElementById('settings-selection').value = 'default';
 })
 
-cancel.addEventListener('click', ()=> {
+cancel.addEventListener('click', () => {
     urlLink.value = '';
     doc.getElementById('url-link').style.display = 'none';
     doc.getElementById('settings').style.height = '28%';
     doc.getElementById('settings-selection').value = 'default';
 })
 
-save.addEventListener('click', ()=> localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src))
+save.addEventListener('click', () => localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src))
 
 // Apps tab
-doc.getElementById('whitelist-apps').addEventListener('click', ()=> {
+doc.getElementById('whitelist-apps').addEventListener('click', () => {
     if (!actWhitelist) {
-        whitelist.style.display='none';
+        whitelist.style.display = 'none';
         actWhitelist = true;
     } else {
-        whitelist.style.display='flex';
+        whitelist.style.display = 'flex';
         actWhitelist = false;
     }
 });
 
-doc.getElementById('jobs-apps').addEventListener('click', ()=> {
+doc.getElementById('jobs-apps').addEventListener('click', () => {
     if (!actJobs) {
-        jobs.style.display='none';
+        jobs.style.display = 'none';
         actJobs = true;
     } else {
-        jobs.style.display='flex';
+        jobs.style.display = 'flex';
         actJobs = false;
     }
 });
 
-doc.getElementById('rules-apps').addEventListener('click', ()=> {
+doc.getElementById('rules-apps').addEventListener('click', () => {
     if (!actRules) {
-        rules.style.display='none';
+        rules.style.display = 'none';
         actRules = true;
     } else {
-        rules.style.display='flex';
+        rules.style.display = 'flex';
         actRules = false;
     }
 });
 
-doc.getElementById('bugs-apps').addEventListener('click', ()=> {
+doc.getElementById('bugs-apps').addEventListener('click', () => {
     if (!actBugs) {
-        bugs.style.display='none';
+        bugs.style.display = 'none';
         actBugs = true;
     } else {
-        bugs.style.display='flex';
+        bugs.style.display = 'flex';
         actBugs = false;
     }
 });
 
+// Bugs tab
+admin.addEventListener('click', () => {
+    bquest.style.opacity = '1';
+})
+
+doc.getElementById('bugs-accept').addEventListener = ()=> {
+    bquest.style.opacity='0';
+    fetchNUI('sendAdminMessage', 'cb')
+}
+
+doc.getElementById('bugs-cancel').addEventListener = () => {
+    bquest.style.opacity = '0';
+}
+
 // Apps
-settings.addEventListener('click', ()=> openTab('settings', 'tablet-page'));
+settings.addEventListener('click', () => openTab('settings', 'tablet-page'));
 
-rules.addEventListener('click', ()=> openTab('rules', 'tablet-page'));
+rules.addEventListener('click', () => openTab('rules', 'tablet-page'));
 
-whitelist.addEventListener('click', ()=> openTab('whitelist', 'tablet-page'));
+whitelist.addEventListener('click', () => openTab('whitelist', 'tablet-page'));
 
-jobs.addEventListener('click', ()=> openTab('jobs', 'tablet-page'));
+jobs.addEventListener('click', () => openTab('jobs', 'tablet-page'));
 
-bugs.addEventListener('click', ()=> openTab('bugs', 'tablet-page'));
+bugs.addEventListener('click', () => openTab('bugs', 'tablet-page'));
 
 function openTab(target, className, settings) {
     let i, tabcontent;
@@ -151,13 +168,13 @@ function openTab(target, className, settings) {
 
 function fadeAnim(anim, opacity) {
     tablet.style.animation = `${anim} 1s forwards`;
-    setTimeout(function() {
+    setTimeout(function () {
         tablet.style.animation = 'none'
         tablet.style.opacity = `${opacity}`
     }, 600)
 }
 
-const fetchNUI = async(cbname, data)=> {
+const fetchNUI = async (cbname, data) => {
     const options = {
         method: 'POST',
         headers: {
@@ -181,9 +198,9 @@ window.addEventListener(`DOMContentLoaded`, () => {
 })
 
 function createOptions(data) {
-	const selection = doc.getElementById('settings-selection');
+    const selection = doc.getElementById('settings-selection');
     const tabletBack = doc.getElementById('tablet-background')
-    selection.addEventListener(`change`, ()=> {
+    selection.addEventListener(`change`, () => {
         if (selection.value == 'url') {
             urlActive = true;
             doc.getElementById('url-link').style.display = 'block'
@@ -197,10 +214,10 @@ function createOptions(data) {
             tabletBack.src = selection.value
         }
     });
-	data.forEach(dataItem => {
-		const option = doc.createElement('option');
-		option.text = dataItem.title;
+    data.forEach(dataItem => {
+        const option = doc.createElement('option');
+        option.text = dataItem.title;
         option.value = dataItem.background
-		selection.add(option);
-	});
+        selection.add(option);
+    });
 }

@@ -283,10 +283,19 @@ body {
 
     background-color: #258ef0;
     
-    font-family: def2;
+    font-family: def2bold;
     font-size: 1vw;
     border-radius: 1.2vh;
     border: none;
+    z-index: 5;
+
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.bugs-nav-btn:hover {
+    transform: scale(1.05);
+    color: #eeeeee;
 }
 
 .bugs-req-container {
@@ -487,12 +496,86 @@ body {
     width: 40%;
     height: 8%;
     margin-bottom: 5%;
+
     border-radius: 0.8vh;
     border: none;
+    background-color: #c0c0c0;
 
     font-family: def2bold;
     font-size: 1.0vw;
     color: #424242;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.bugs-form-submit:hover {
+    transform: scale(1.05);
+    background-color: #258ef0;
+    color: #eeeeee;
+}
+
+.bugs-question-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 40%;
+    height: 20%;  
+    border-radius: 1vh;
+
+    background-color: #353e55;
+    opacity: 0;
+    transition: 1s;
+    z-index: 5;
+}
+
+.bugs-question-container {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+    width: 100%;
+    height: 65%;
+}
+
+.bugs-question-container p {
+    font-size: 1.5vw;
+    font-family: def2bold;
+    color: #e6e6e6;
+}
+
+.bugs-question-btns {
+    display: flex;
+    width: 100%;
+    height: 40%;
+    justify-content: space-evenly;
+}
+
+.bugs-question-btns button {
+    width: 35%;
+    height: 100%;
+    border-radius: 0.8vh;
+    border: none;
+
+    font-size: 1vw;
+    font-family: def2bold;
+    font-weight: 100;
+    color: #424242;
+
+    background-color: #c0c0c0;
+    transition: 0.3s;
+}
+
+.bugs-question-btns button:hover {
+    color: #eeeeee;
+    background-color: #258ef0;
 }
 
 .bugs-desc-container {
