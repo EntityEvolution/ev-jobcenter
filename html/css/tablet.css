@@ -471,7 +471,7 @@ body {
     
     border-radius: 0.4vh;
     background-color: #e1e1e1;
-    border: 0.1vh solid #818181; 
+    border: 0.1vh solid #818181;
 }
 
 .discord {
@@ -516,6 +516,7 @@ body {
 }
 
 .bugs-question-wrapper {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -571,6 +572,7 @@ body {
 
     background-color: #c0c0c0;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .bugs-question-btns button:hover {

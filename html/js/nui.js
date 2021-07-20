@@ -122,17 +122,26 @@ doc.getElementById('bugs-apps').addEventListener('click', () => {
 
 // Bugs tab
 admin.addEventListener('click', () => {
-    bquest.style.opacity = '1';
+    bquest.style.display='block';
+    setTimeout(function() {
+        bquest.style.opacity='1';
+    }, 100)
 })
 
-doc.getElementById('bugs-accept').addEventListener = ()=> {
+doc.getElementById('bugs-accept').addEventListener('click', ()=> {
     bquest.style.opacity='0';
     fetchNUI('sendAdminMessage', 'cb')
-}
+    setTimeout(function() {
+        bquest.style.opacity='none';
+    }, 600)
+})
 
-doc.getElementById('bugs-cancel').addEventListener = () => {
+doc.getElementById('bugs-cancel').addEventListener('click', () => {
     bquest.style.opacity = '0';
-}
+    setTimeout(function() {
+        bquest.style.display='none';
+    }, 600)
+})
 
 // Apps
 settings.addEventListener('click', () => openTab('settings', 'tablet-page'));
