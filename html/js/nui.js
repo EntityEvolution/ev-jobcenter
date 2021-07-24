@@ -18,6 +18,7 @@ const save = doc.getElementById('save-back')
 
 const admin = doc.getElementById('admin-btn')
 const bquest = doc.getElementById('bugs-question')
+const submit = doc.getElementById('bugs-submit')
 
 let urlActive = false;
 
@@ -141,6 +142,17 @@ doc.getElementById('bugs-cancel').addEventListener('click', () => {
     setTimeout(function() {
         bquest.style.display='none';
     }, 600)
+})
+
+submit.addEventListener('click', ()=> {
+    const cls = doc.getElementsByClassName('inp');
+    let subject = doc.getElementById('data-subject').value;
+    let data = [];
+    for (let i = 0; i < cls.length; i++) {
+        data.push(cls[i].value)
+    }
+    console.log(subject)
+    fetchNUI('getFormData', {subject: subject, discord: data[0], issue: data[1], description: data[2]})
 })
 
 // Apps

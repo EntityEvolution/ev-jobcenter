@@ -919,10 +919,10 @@ input:checked + .slider {
 
     width: 16vh;
     left: -50%;
-    top: -90%;
+    top: -70%;
 
     border-radius: 1vh;
-    padding: 1vh 0;
+    padding: 0.5vh 0;
 
     opacity: 0;
     transition: 0.2s;
