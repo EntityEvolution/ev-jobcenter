@@ -29,20 +29,20 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 0.4vh;
+    height: 0.8vh;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #555;
+    background-color: #555;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 1vh;
+    background: var(--white);
+    border-radius: 0.6vh;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #a7a7a7;
 }
 
 .wrapper {
@@ -108,7 +108,35 @@ body {
 }
 
 .jobs {
-    background-color: rgb(17, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: transparent;
+}
+
+.jobs-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    left: 0;
+    width: 85%;
+    height: 60%;
+
+    margin-bottom: 5%;
+    overflow-x: scroll;
+    z-index: 1;
+}
+
+.job-slide-container {
+    position: relative;
+    width: 30vh;
+    height: 90%;
+    margin-right: 2.5vh;
+    margin-left: 2.5vh;
+    flex-shrink: 0;
+    
+    background-color: #d12357;
 }
 
 .rules {
