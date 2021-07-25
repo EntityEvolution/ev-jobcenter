@@ -24,7 +24,7 @@ ui_page 'html/ui.html'
 
 files {
     'html/ui.html',
-    'config/config.json',
+    'html/json/*.json',
     'html/img/tablet/*.png',
     'html/img/tablet/*.jpg',
     'html/img/apps/*.png',
