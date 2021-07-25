@@ -172,7 +172,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     color: var(--white);
-    
+
     z-index: 2;
 }
 
@@ -208,6 +208,16 @@ body {
     margin-left: 3%;
     margin-right: 3%;
     margin-top: 3%;
+}
+
+.loc {
+    transition: 0.1s;
+}
+
+.loc:hover {
+    cursor: pointer;
+    color: #2678c0;
+    text-decoration: underline;
 }
 
 .slide-desc-container {
