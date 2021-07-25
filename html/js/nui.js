@@ -187,6 +187,21 @@ function openTab(target, className, settings) {
     }
 }
 
+const dropdown = document.getElementsByClassName("dropdown-btn");
+let i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener('click', function() {
+    this.classList.toggle('active');
+    const dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === 'block') {
+      dropdownContent.style.display='none';
+    } else {
+      dropdownContent.style.display='block';
+    }
+  });
+}
+
 function fadeAnim(anim, opacity) {
     tablet.style.animation = `${anim} 1s forwards`;
     setTimeout(function () {
@@ -217,6 +232,72 @@ window.addEventListener(`DOMContentLoaded`, () => {
             console.error('Error: ' + error);
         });
 })
+
+window.addEventListener(`DOMContentLoaded`, () => {
+    fetch(`../html/json/jobs.json`)
+        .then((response) => response.json())
+        .then((data) => {
+            createJobs(data);
+        })
+        .catch((error) => {
+            console.error('Error: ' + error);
+        });
+})
+
+function createJobs(data) {
+    const cont = doc.getElementById('jobs-container');
+    data.forEach(dataItem => {
+        const divMain = doc.createElement('div')
+        const divImage = doc.createElement('div')
+        const imageJob = doc.createElement('img')
+        const imageTitle = doc.createElement('span')
+        const divLocation = doc.createElement('div')
+        const locationTitle = doc.createElement('span')
+        const locationText = doc.createElement('span')
+        const divDesc = doc.createElement('div')
+        const descTitle = doc.createElement('span')
+        const descText = doc.createElement('span')
+        const divBtn = doc.createElement('div')
+        const btn = doc.createElement('button')
+
+
+        divMain.classList.add('job-slide-container')
+        divImage.classList.add('slide-image-container')
+        imageJob.classList.add('slide-image')
+        imageTitle.classList.add('image-title')
+        divLocation.classList.add('slide-location-container')
+        locationTitle.classList.add('def-title')
+        locationText.classList.add('def-text')
+        divDesc.classList.add('slide-desc-container')
+        descTitle.classList.add('def-title')
+        descText.classList.add('def-text')
+        divBtn.classList.add('slide-btn-container')
+        btn.classList.add('jobs-btn')
+
+        imageJob.src = dataItem.imageJob
+        imageTitle.innerHTML = dataItem.imageTitle
+        locationTitle.innerHTML = dataItem.locationTitle
+        locationText.innerHTML = dataItem.locationDescription
+        descTitle.innerHTML = dataItem.descTitle
+        descText.innerHTML = dataItem.descDescription
+        btn.innerHTML = dataItem.buttonText
+
+        divBtn.appendChild(btn)
+        divDesc.appendChild(descTitle)
+        divDesc.appendChild(descText)
+        divLocation.appendChild(locationTitle)
+        divLocation.appendChild(locationText)
+
+        divImage.appendChild(imageJob)
+        divImage.appendChild(imageTitle)
+
+        divMain.appendChild(divImage)
+        divMain.appendChild(divLocation)
+        divMain.appendChild(divDesc)
+        divMain.appendChild(divBtn)
+        cont.appendChild(divMain)
+    });
+}
 
 function createOptions(data) {
     const selection = doc.getElementById('settings-selection');
