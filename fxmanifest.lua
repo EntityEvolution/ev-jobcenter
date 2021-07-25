@@ -27,6 +27,8 @@ files {
     'html/json/*.json',
     'html/img/tablet/*.png',
     'html/img/tablet/*.jpg',
+    'html/img/tablet/backgrounds/*.png',
+    'html/img/tablet/backgrounds/*.jpg',
     'html/img/apps/*.png',
     'html/fonts/*.ttf',
     'html/css/*.css',
