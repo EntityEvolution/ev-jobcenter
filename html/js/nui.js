@@ -366,6 +366,7 @@ function createJobs(data) {
 
         imageJob.src = dataItem.imageJob;
         imageJob.setAttribute("loading", "lazy")
+        imageJob.alt = 'Job image'
         imageTitle.innerHTML = dataItem.imageTitle;
         locationTitle.innerHTML = dataItem.locationTitle;
         locationText.innerHTML = dataItem.locationDescription;

@@ -2,12 +2,12 @@ local Wait = Wait
 local PlayerPedId = PlayerPedId
 local GetEntityCoords = GetEntityCoords
 local GetStreetNameAtCoord = GetStreetNameAtCoord
+local GetHashKey = GetHashKey
 
 local isOpen = false
 local insidePoly, startNoti = false, false
 
 local dict, anim = 'amb@world_human_seat_wall_tablet@female@base', 'base'
-local model = GetHashKey('prop_cs_tablet')
 
 CreateThread(function()
     while isOpen do
@@ -274,6 +274,7 @@ end
 
 function startAnim()
     local ped = PlayerPedId()
+    local model = GetHashKey('prop_cs_tablet')
 	RequestModel(model)
 	while not HasModelLoaded(model) do
 		Wait(15)

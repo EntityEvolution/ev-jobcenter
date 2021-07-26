@@ -9,13 +9,16 @@
     <title>Job center</title>
 
     <!--CSS and images links-->
-    <link rel="stylesheet" href="./css/tablet.css">
+    <link rel="stylesheet" href="./css/tablet.min.css">
     <style>
         #url-link {
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script defer src="https://kit.fontawesome.com/3828d6dd29.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="./fonts/KumbhSans-Bold.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./fonts/KumbhSans-Regular.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./fonts/MerriweatherSans-Regular.ttf" as="font" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -101,22 +104,22 @@
                 <div class="rules-text-container">
                     <!--
                         h1 = title
-                        h3 = subtitle
-                        h5 = sub subtitle
+                        h2 = subtitle
+                        h3 = sub subtitle
                         p = text
                         <h1 class="rules-text-title"></h1>
-                        <h3 class="rules-text-subt"></h3>
-                        <h5 class="rules-text-subsub"></h5>
+                        <h2 class="rules-text-subt"></h3>
+                        <h3 class="rules-text-subsub"></h5>
                     -->
                     <h1 id="titler" class="rules-text-title">Rules</h1>
-                    <h3 class="rules-text-subt">Basic Concepts</h3>
-                    <h5 id="1.1" class="rules-text-subsub">1.1 | OOC</h5>
+                    <h2 class="rules-text-subt">Basic Concepts</h2>
+                    <h3 id="1.1" class="rules-text-subsub">1.1 | OOC</h3>
                     <p class="rules-text-text">
                         Lorem ipsum dolor sit amet, duo choro discere nonumes cu, ad sea legere nemore laboramus. Soluta saperet splendide sit ei, eu eam suas virtute delicata. Noster adolescens theophrastus no eum. Ei vim dicam mandamus, te sed graeco alienum. Erat veritus
                         neglegentur his ut. Ocurreret scriptorem no quo, te est veniam forensibus moderatius. Ad viris eruditi nostrum vim, est alia semper aliquid ex. Ea nobis iudico referrentur mel. Ad labore philosophia ius, modus eligendi in duo.
                         Iisque menandri quo ea.</p>
-                    <h5 class="rules-text-subsub">Link 2</h5>
-                    <h5 class="rules-text-subsub">Link 3</h5>
+                    <h3 class="rules-text-subsub">Link 2</h3>
+                    <h3 class="rules-text-subsub">Link 3</h3>
 
                     <h3 class="rules-text-subt">Killing</h3>
                     <h3 class="rules-text-subt">Jobs</h3>
@@ -249,25 +252,25 @@
                         <label class="switch">
                             <input type="checkbox" checked>
                             <span id="whitelist-apps" class="slider">
-                                <img class="slider-img" src="./img/apps/glass.png">
+                                <img class="slider-img" src="./img/apps/glass.png" alt="Glass">
                             </span>
                           </label>
                         <label class="switch">
                             <input type="checkbox" checked>
                             <span id="jobs-apps" class="slider">
-                                <img class="slider-img" src="./img/apps/suitcase.png">
+                                <img class="slider-img" src="./img/apps/suitcase.png" alt="Suitcase">
                             </span>
                           </label>
                         <label class="switch">
                             <input type="checkbox" checked>
                             <span id="rules-apps" class="slider">
-                                <img class="slider-img" src="./img/apps/file.png">
+                                <img class="slider-img" src="./img/apps/file.png" alt="File">
                             </span>
                           </label>
                         <label class="switch">
                             <input type="checkbox">
                             <span id="bugs-apps" class="slider">
-                                <img class="slider-img" src="./img/apps/warning.png">
+                                <img class="slider-img" src="./img/apps/warning.png" alt="Warning">
                             </span>
                           </label>
                     </div>

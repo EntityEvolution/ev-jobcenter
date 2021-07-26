@@ -561,7 +561,7 @@ body {
 
 .bugs-nav-title-img {
     width: 8vh;
-    height: auto;
+    height: 8vh;
 }
 
 .bugs-nav-btn {
@@ -1134,7 +1134,7 @@ input:checked + .slider {
 
 .slider-img {
     width: 6vh;
-    height: auto;
+    height: 6vh;
 }
 
 .tablet-date-container {
