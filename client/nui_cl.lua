@@ -130,17 +130,13 @@ local jobCenter <const> = PolyZone:Create({
 
 -- Polyzones check
 jobCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
-    if isPointInside then
-        if not insidePoly then
-            insidePoly = true
-            startNoti = true
-            showNoti()
-        end
-    else
-        if insidePoly then
-            insidePoly = false
-            showNoti()
-        end
+    if not insidePoly then
+        insidePoly = true
+        startNoti = true
+        showNoti()
+    else insidePoly then
+        insidePoly = false
+        showNoti()
     end
 end)
 
@@ -162,3 +158,50 @@ AddEventHandler('onResourceStart', function(resourceName)
 		SendNUIMessage({ action = 'restoreData' })
 	end
 end)
+
+-- Noti
+function showNoti()
+    if insidePoly then
+        if Config.useFloating then
+            CreateThread(function()
+                while insidePoly do
+                    local coords = GetEntityCoords(PlayerPedId())
+                    showFloatingHelpNotification(Config.openText, vec3(coords.x, coords.y, coords.z + 1))
+                    Wait(5)
+                end
+            end)
+        elseif Config.useNormal then
+            if startNoti then
+                CreateThread(function()
+                    while insidePoly do
+                        showHelpNotification(Config.openText)
+                        Wait(5)
+                    end
+                end)
+            end
+        elseif Config.useTnotify then
+            if startNoti then
+                exports['t-notify']:Persist({
+                    id = 'jobcenter',
+                    step = 'start',
+                    options = {
+                        style = 'info',
+                        title = Config.tnotifyTitle,
+                        message = Config.tnotifyMessage,
+                        sound = Config.tnotifySound
+                    }
+                })
+            end
+        end
+    else
+        if startNoti then
+            startNoti = false
+            if Config.useTnotify then
+                exports['t-notify']:Persist({
+                    id = 'jobcenter',
+                    step = 'end'
+                })
+            end
+        end
+    end
+end
