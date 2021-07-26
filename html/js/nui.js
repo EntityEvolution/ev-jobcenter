@@ -21,6 +21,7 @@ const bquest = doc.getElementById('bugs-question')
 const submit = doc.getElementById('bugs-submit')
 
 let urlActive = false;
+let notiActive = false
 
 let actWhitelist = false;
 let actJobs = false;
@@ -187,10 +188,9 @@ function openTab(target, className, settings) {
     }
 }
 
-const dropdown = document.getElementsByClassName("dropdown-btn");
-let i;
+const dropdown = doc.getElementsByClassName("dropdown-btn");
 
-for (i = 0; i < dropdown.length; i++) {
+for (let i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener('click', function() {
     this.classList.toggle('active');
     const dropdownContent = this.nextElementSibling;
@@ -208,6 +208,52 @@ function fadeAnim(anim, opacity) {
         tablet.style.animation = 'none'
         tablet.style.opacity = `${opacity}`
     }, 600)
+}
+
+function progressNoti(message, sec) {
+    let i = 0;
+    const text = doc.getElementById('noti-text')
+    const container = doc.getElementById('tablet-notification')
+    const progress = doc.getElementById('progress-noti');
+    if (i == 0) {
+        text.textContent = '\xa0\xa0' + message
+        if (sec === undefined && i == 0) {
+            sec = 5
+        }
+        i = 1;
+        const fadeNoti = (anim, opacity) => {
+            container.style.animation = `${anim} 0.7s forwards`;
+            setTimeout(function () {
+                container.style.animation = 'none'
+                container.style.opacity = `${opacity}`
+            }, 600)
+        }
+        if (!notiActive) {
+            fadeNoti('fadeIn', 1)
+            let curWidth = 100.0;
+            let id = setInterval(frame, sec * 5);
+            function frame() {
+                if (curWidth <= 0) {
+                    if (notiActive) {
+                        notiActive = false
+                    }
+                    clearInterval(id);
+                    i = 0;
+                    curWidth = 100.0
+                    fadeNoti('fadeOut', 0)
+                    return
+                } else {
+                    if (!notiActive) {
+                        notiActive = true
+                    }
+                    curWidth -= 0.5;
+                    progress.style.width = curWidth + "%";
+                }
+            }
+        } else {
+            console.log('Currently Active')
+        }
+    }
 }
 
 const fetchNUI = async (cbname, data) => {
@@ -247,58 +293,67 @@ window.addEventListener(`DOMContentLoaded`, () => {
 function createJobs(data) {
     const cont = doc.getElementById('jobs-container');
     data.forEach(dataItem => {
-        const divMain = doc.createElement('div');
-        const divImage = doc.createElement('div');
-        const imageJob = doc.createElement('img');
-        const imageTitle = doc.createElement('span');
-        const divLocation = doc.createElement('div');
-        const locationTitle = doc.createElement('span');
-        const locationText = doc.createElement('span');
-        const divDesc = doc.createElement('div');
-        const descTitle = doc.createElement('span');
-        const descText = doc.createElement('span');
-        const divBtn = doc.createElement('div');
-        const btn = doc.createElement('button');
-
-
-        divMain.classList.add('job-slide-container');
-        divImage.classList.add('slide-image-container');
-        imageJob.classList.add('slide-image');
-        imageTitle.classList.add('image-title');
-        divLocation.classList.add('slide-location-container');
-        locationTitle.classList.add('def-title');
-        locationText.classList.add('def-text', 'loc');
-        divDesc.classList.add('slide-desc-container');
-        descTitle.classList.add('def-title');
-        descText.classList.add('def-text');
-        divBtn.classList.add('slide-btn-container');
-        btn.classList.add('jobs-btn');
-
-        imageJob.src = dataItem.imageJob;
-        imageTitle.innerHTML = dataItem.imageTitle;
-        locationTitle.innerHTML = dataItem.locationTitle;
-        locationText.innerHTML = dataItem.locationDescription;
-        descTitle.innerHTML = dataItem.descTitle;
-        descText.innerHTML = dataItem.descDescription;
-        btn.innerHTML = dataItem.buttonText;
-        btn.id = dataItem.job;
-
-        btn.addEventListener('click', () => fetchNUI('getDataJob', dataItem.job));
-        locationText.addEventListener('click', () => fetchNUI('getDataJob', dataItem.locationCoords));
-        divBtn.appendChild(btn);
-        divDesc.appendChild(descTitle);
-        divDesc.appendChild(descText);
-        divLocation.appendChild(locationTitle);
-        divLocation.appendChild(locationText);
-
-        divImage.appendChild(imageJob);
-        divImage.appendChild(imageTitle);
-
-        divMain.appendChild(divImage);
-        divMain.appendChild(divLocation);
-        divMain.appendChild(divDesc);
-        divMain.appendChild(divBtn);
-        cont.appendChild(divMain);
+        if (JSON.parse(dataItem.whitelist) == false) {
+            const divMain = doc.createElement('div');
+            const divImage = doc.createElement('div');
+            const imageJob = doc.createElement('img');
+            const imageTitle = doc.createElement('span');
+            const divLocation = doc.createElement('div');
+            const locationTitle = doc.createElement('span');
+            const locationText = doc.createElement('span');
+            const divDesc = doc.createElement('div');
+            const descTitle = doc.createElement('span');
+            const descText = doc.createElement('span');
+            const divBtn = doc.createElement('div');
+            const btn = doc.createElement('button');
+    
+    
+            divMain.classList.add('job-slide-container');
+            divImage.classList.add('slide-image-container');
+            imageJob.classList.add('slide-image');
+            imageTitle.classList.add('image-title');
+            divLocation.classList.add('slide-location-container');
+            locationTitle.classList.add('def-title');
+            locationText.classList.add('def-text', 'loc');
+            divDesc.classList.add('slide-desc-container');
+            descTitle.classList.add('def-title');
+            descText.classList.add('def-text');
+            divBtn.classList.add('slide-btn-container');
+            btn.classList.add('jobs-btn');
+    
+            imageJob.src = dataItem.imageJob;
+            imageJob.setAttribute("loading", "lazy")
+            imageTitle.innerHTML = dataItem.imageTitle;
+            locationTitle.innerHTML = dataItem.locationTitle;
+            locationText.innerHTML = dataItem.locationDescription;
+            descTitle.innerHTML = dataItem.descTitle;
+            descText.innerHTML = dataItem.descDescription;
+            btn.innerHTML = dataItem.buttonText;
+            btn.id = dataItem.job;
+    
+            btn.addEventListener('click', () => {
+                fetchNUI('getDataJob', dataItem.job),
+                progressNoti(dataItem.buttonNotification, 5);
+            });
+            locationText.addEventListener('click', () => {
+                fetchNUI('getDataLocation', dataItem.locationCoords),
+                progressNoti(dataItem.locationNotification, 5);
+            });
+            divBtn.appendChild(btn);
+            divDesc.appendChild(descTitle);
+            divDesc.appendChild(descText);
+            divLocation.appendChild(locationTitle);
+            divLocation.appendChild(locationText);
+    
+            divImage.appendChild(imageJob);
+            divImage.appendChild(imageTitle);
+    
+            divMain.appendChild(divImage);
+            divMain.appendChild(divLocation);
+            divMain.appendChild(divDesc);
+            divMain.appendChild(divBtn);
+            cont.appendChild(divMain);
+        }
     });
 }
 

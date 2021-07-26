@@ -15,16 +15,23 @@
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
     <div id="tablet" class="wrapper">
         <div class="container">
-            <img class="tablet-img" src="./img/tablet/tablet.png" alt="tablet">
+            <img class="tablet-img" src="./img/tablet/tablet.png" alt="tablet" loading="lazy">
         </div>
         <div class="tablet-wrapper">
-            <img id="tablet-background" class="tablet-background" src="./img/backgrounds/default.jpg" alt="Not Found" onerror="this.onerror=null; this.src='./img/backgrounds/notfound.jpg'">
+            <span id="tablet-notification" class="tablet-notification">
+                <span class="fa fa-bell"></span>
+                <span id="noti-text">&#160 Notification Text</span>
+                <span class="progress-noti-container">
+                    <div id="progress-noti"></div>
+                </span>
+            </span>
+            <img id="tablet-background" class="tablet-background" src="./img/backgrounds/default.jpg" alt="Not Found" onerror="this.onerror=null; this.src='./img/backgrounds/notfound.jpg'" loading="lazy">
             <div id="whitelist" class="tablet-page whitelist">
 
             </div>
@@ -85,9 +92,9 @@
                         h3 = subtitle
                         h5 = sub subtitle
                         p = text
-                    <h1 class="rules-text-title"></h1>
-                    <h3 class="rules-text-subt"></h3>
-                    <h5 class="rules-text-subsub"></h5>
+                        <h1 class="rules-text-title"></h1>
+                        <h3 class="rules-text-subt"></h3>
+                        <h5 class="rules-text-subsub"></h5>
                     -->
                     <h1 id="titler" class="rules-text-title">Rules</h1>
                     <h3 class="rules-text-subt">Basic Concepts</h3>
@@ -111,7 +118,7 @@
             <div id="bugs" class="tablet-page bugs">
                 <div class="bugs-nav-container">
                     <h2 class="bugs-nav-title">Report Form</h2>
-                    <img class="bugs-nav-title-img" src="./img/apps/glass.png" alt="Find">
+                    <img class="bugs-nav-title-img" src="./img/apps/glass.png" alt="Find" loading="lazy">
                     <button id="admin-btn" class="bugs-nav-btn">Contact Administration</button>
                 </div>
                 <div class="bugs-req-container">

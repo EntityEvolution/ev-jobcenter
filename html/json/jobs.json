@@ -1,13 +1,31 @@
 [
     {
+        "whitelist" : "false",
         "job" : "ambulance",
         "imageJob" : "https://content.invisioncic.com/u301062/monthly_2021_03/large.1240773322_FiveM-StatewideRoleplay_Server1_WhitelistedCommunity_Apply@statewiderp.net11_03_20212_17_52PM(2).png.764d9d4a29cdadb807ffa50a3b914fe6.png",
         "imageTitle" : "Ambulance",
         "locationTitle" : "Location",
         "locationDescription" : "Misson Row",
+        "locationNotification" : "Location has been marked!",
         "locationCoords" : "10 10",
         "descTitle" : "Description",
-        "descDescription" : "A simple job of something idk",
-        "buttonText" : "Apply"
+        "descDescription" : "A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk",
+        "buttonText" : "Apply",
+        "buttonNotification" : "You have applied to the LSFD"
+    },
+
+    {
+        "whitelist" : "true",
+        "job" : "ambulance",
+        "imageJob" : "https://content.invisioncic.com/u301062/monthly_2021_03/large.1240773322_FiveM-StatewideRoleplay_Server1_WhitelistedCommunity_Apply@statewiderp.net11_03_20212_17_52PM(2).png.764d9d4a29cdadb807ffa50a3b914fe6.png",
+        "imageTitle" : "Police",
+        "locationTitle" : "Location",
+        "locationDescription" : "Misson Row",
+        "locationNotification" : "Location has been marked!",
+        "locationCoords" : "10 10",
+        "descTitle" : "Description",
+        "descDescription" : "ob of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk",
+        "buttonText" : "Apply",
+        "buttonNotification" : "You have applied to the LSFD"
     }
 ]
