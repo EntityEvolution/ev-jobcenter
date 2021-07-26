@@ -36,10 +36,10 @@ window.addEventListener('load', () => {
         if (Config.devMode) {
             console.log('Started jobcenter');
             fadeAnim('fadeIn', '1');
-            doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
+            doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground');
+            whitelist.click();
         }
         apps.click();
-        whitelist.click();
     } catch (e) {
         console.log('error: ' + e)
     }
