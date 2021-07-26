@@ -18,7 +18,10 @@ const save = doc.getElementById('save-back')
 
 const admin = doc.getElementById('admin-btn')
 const bquest = doc.getElementById('bugs-question')
+const wquest = doc.getElementById('whitelist-question')
 const submit = doc.getElementById('bugs-submit')
+
+const dropdown = doc.getElementsByClassName("dropdown-btn");
 
 let urlActive = false;
 let notiActive = false
@@ -33,7 +36,7 @@ window.addEventListener('load', () => {
         console.log('Started jobcenter');
         fadeAnim('fadeIn', '1');
         apps.click();
-        jobs.click();
+        whitelist.click();
         // Restore old tablet background //doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
     } catch (e) {
         console.log('error: ' + e)
@@ -136,6 +139,7 @@ doc.getElementById('bugs-accept').addEventListener('click', ()=> {
     setTimeout(function() {
         bquest.style.opacity='none';
     }, 600)
+    progressNoti('Administrators have received your message', 5)
 })
 
 doc.getElementById('bugs-cancel').addEventListener('click', () => {
@@ -150,10 +154,14 @@ submit.addEventListener('click', ()=> {
     let subject = doc.getElementById('data-subject').value;
     let data = [];
     for (let i = 0; i < cls.length; i++) {
-        data.push(cls[i].value)
+        if (!cls[i].value) {
+            progressNoti('Data is missing', 3)
+            return
+        } else {
+            data.push(cls[i].value)
+        }
     }
-    console.log(subject)
-    fetchNUI('getFormData', {subject: subject, discord: data[0], issue: data[1], description: data[2]})
+    fetchNUI('getDataForm', {subject: subject, discord: data[0], issue: data[1], description: data[2]})
 })
 
 // Apps
@@ -187,8 +195,6 @@ function openTab(target, className, settings) {
         }
     }
 }
-
-const dropdown = doc.getElementsByClassName("dropdown-btn");
 
 for (let i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener('click', function() {
@@ -268,6 +274,41 @@ const fetchNUI = async (cbname, data) => {
     return await resp.json();
 }
 
+function wQuestion(data) {
+    const acp = doc.getElementById('whitelist-accept');
+    const can = doc.getElementById('whitelist-cancel');
+
+    if (acp.getAttribute('listener') !== 'true') {
+        doc.getElementById('whitelist-accept').addEventListener('click', (e)=> {
+            const elementClicked = e.target;
+            elementClicked.setAttribute('listener', 'true');
+            const q = doc.getElementById('whitelist-val').value
+            if (!q) {
+                progressNoti('No message posted')
+            } else {
+                progressNoti('Message sent')
+                wquest.style.opacity = '0';
+                setTimeout(function() {
+                    wquest.style.display='none';
+                }, 600)
+                fetchNUI('sendFormData', {})
+            }
+        })
+    }
+
+    if (can.getAttribute('listener') !== 'true') {
+        can.addEventListener('click', (e)=> {
+            const elementClicked = e.target;
+            elementClicked.setAttribute('listener', 'true');
+            wquest.style.opacity = '0';
+            setTimeout(function() {
+                wquest.style.display='none';
+            }, 600)
+        })
+    }
+
+}
+
 window.addEventListener(`DOMContentLoaded`, () => {
     fetch(`../html/json/backgrounds.json`)
         .then((response) => response.json())
@@ -292,8 +333,9 @@ window.addEventListener(`DOMContentLoaded`, () => {
 
 function createJobs(data) {
     const cont = doc.getElementById('jobs-container');
+    const contWhitelist = doc.getElementById('whitelist-container')
     data.forEach(dataItem => {
-        if (JSON.parse(dataItem.whitelist) == false) {
+        if (JSON.parse(dataItem.whitelist)) {
             const divMain = doc.createElement('div');
             const divImage = doc.createElement('div');
             const imageJob = doc.createElement('img');
@@ -306,8 +348,8 @@ function createJobs(data) {
             const descText = doc.createElement('span');
             const divBtn = doc.createElement('div');
             const btn = doc.createElement('button');
-    
-    
+
+
             divMain.classList.add('job-slide-container');
             divImage.classList.add('slide-image-container');
             imageJob.classList.add('slide-image');
@@ -320,7 +362,7 @@ function createJobs(data) {
             descText.classList.add('def-text');
             divBtn.classList.add('slide-btn-container');
             btn.classList.add('jobs-btn');
-    
+
             imageJob.src = dataItem.imageJob;
             imageJob.setAttribute("loading", "lazy")
             imageTitle.innerHTML = dataItem.imageTitle;
@@ -330,24 +372,86 @@ function createJobs(data) {
             descText.innerHTML = dataItem.descDescription;
             btn.innerHTML = dataItem.buttonText;
             btn.id = dataItem.job;
-    
+
             btn.addEventListener('click', () => {
-                fetchNUI('getDataJob', dataItem.job),
-                progressNoti(dataItem.buttonNotification, 5);
+                wquest.style.display='block';
+                setTimeout(function() {
+                    wquest.style.opacity='1';
+                }, 100)
+                wQuestion(dataItem);
             });
             locationText.addEventListener('click', () => {
                 fetchNUI('getDataLocation', dataItem.locationCoords),
-                progressNoti(dataItem.locationNotification, 5);
+                progressNoti(dataItem.locationNotification, 1.5);
             });
             divBtn.appendChild(btn);
             divDesc.appendChild(descTitle);
             divDesc.appendChild(descText);
             divLocation.appendChild(locationTitle);
             divLocation.appendChild(locationText);
-    
+
             divImage.appendChild(imageJob);
             divImage.appendChild(imageTitle);
-    
+
+            divMain.appendChild(divImage);
+            divMain.appendChild(divLocation);
+            divMain.appendChild(divDesc);
+            divMain.appendChild(divBtn);
+            contWhitelist.appendChild(divMain);
+        } else {
+            const divMain = doc.createElement('div');
+            const divImage = doc.createElement('div');
+            const imageJob = doc.createElement('img');
+            const imageTitle = doc.createElement('span');
+            const divLocation = doc.createElement('div');
+            const locationTitle = doc.createElement('span');
+            const locationText = doc.createElement('span');
+            const divDesc = doc.createElement('div');
+            const descTitle = doc.createElement('span');
+            const descText = doc.createElement('span');
+            const divBtn = doc.createElement('div');
+            const btn = doc.createElement('button');
+
+
+            divMain.classList.add('job-slide-container');
+            divImage.classList.add('slide-image-container');
+            imageJob.classList.add('slide-image');
+            imageTitle.classList.add('image-title');
+            divLocation.classList.add('slide-location-container');
+            locationTitle.classList.add('def-title');
+            locationText.classList.add('def-text', 'loc');
+            divDesc.classList.add('slide-desc-container');
+            descTitle.classList.add('def-title');
+            descText.classList.add('def-text');
+            divBtn.classList.add('slide-btn-container');
+            btn.classList.add('jobs-btn');
+
+            imageJob.src = dataItem.imageJob;
+            imageJob.setAttribute("loading", "lazy")
+            imageTitle.innerHTML = dataItem.imageTitle;
+            locationTitle.innerHTML = dataItem.locationTitle;
+            locationText.innerHTML = dataItem.locationDescription;
+            descTitle.innerHTML = dataItem.descTitle;
+            descText.innerHTML = dataItem.descDescription;
+            btn.innerHTML = dataItem.buttonText;
+            btn.id = dataItem.job;
+
+            btn.addEventListener('click', () => {
+            });
+            locationText.addEventListener('click', () => {
+                fetchNUI('getDataLocation', dataItem.locationCoords),
+                progressNoti(dataItem.locationNotification, 1.5);
+            });
+
+            divBtn.appendChild(btn);
+            divDesc.appendChild(descTitle);
+            divDesc.appendChild(descText);
+            divLocation.appendChild(locationTitle);
+            divLocation.appendChild(locationText);
+
+            divImage.appendChild(imageJob);
+            divImage.appendChild(imageTitle);
+
             divMain.appendChild(divImage);
             divMain.appendChild(divLocation);
             divMain.appendChild(divDesc);

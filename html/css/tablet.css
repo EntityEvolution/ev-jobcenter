@@ -30,6 +30,7 @@ body {
 
 ::-webkit-scrollbar {
     height: 0.8vh;
+    width: 0.8vh;
 }
 
 ::-webkit-scrollbar-track {
@@ -149,7 +150,74 @@ body {
 }
 
 .whitelist {
-    background-color: rgb(0, 72, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: transparent;
+}
+
+.whitelist-question-container {
+    margin-top: 2.5%;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+    width: 100%;
+    height: 100%;
+}
+
+.whitelist-input {
+    position: relative;
+    width: 60%;
+    height: 20%;
+
+    text-align: center;
+    font-size: 0.8vw;
+    font-family: def2;
+    
+    border-radius: 0.4vh;
+    background-color: #e1e1e1;
+    border: 0.1vh solid #818181;
+}
+
+.whitelist-inp-msg {
+    font-size: 1.5vw;
+    font-family: def2bold;
+    color: #e6e6e6;
+}
+
+.whitelist-question-btns {
+    display: flex;
+    width: 100%;
+    height: 40%;
+    justify-content: space-evenly;
+}
+
+.whitelist-question-btns button {
+    width: 35%;
+    height: 55%;
+    border-radius: 0.8vh;
+    border: none;
+
+    font-size: 1vw;
+    font-family: def2bold;
+    font-weight: 100;
+    color: #424242;
+
+    background-color: #c0c0c0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.whitelist-question-btns button:hover {
+    color: #eeeeee;
+    background-color: #258ef0;
 }
 
 .jobs {
@@ -1010,7 +1078,7 @@ body {
 
 .settings-url:hover,
 .settings-selection:hover,
-.settings-buttons:hover
+.settings-buttons:hover,
 .settings-save:hover {
     border: 0.1vh solid white;
 }
