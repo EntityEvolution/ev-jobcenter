@@ -134,7 +134,7 @@ jobCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point
         insidePoly = true
         startNoti = true
         showNoti()
-    else insidePoly then
+    else
         insidePoly = false
         showNoti()
     end
