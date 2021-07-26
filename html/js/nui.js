@@ -73,6 +73,8 @@ accept.addEventListener('click', () => {
     doc.getElementById('url-link').style.display = 'none';
     doc.getElementById('settings').style.height = '28%';
     doc.getElementById('settings-selection').value = 'default';
+    console.log('a')
+    progressNoti('Saved background', 3);
 })
 
 cancel.addEventListener('click', () => {
@@ -82,7 +84,10 @@ cancel.addEventListener('click', () => {
     doc.getElementById('settings-selection').value = 'default';
 })
 
-save.addEventListener('click', () => localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src))
+save.addEventListener('click', () => {
+    localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src);
+    progressNoti('Saved background!', 3)
+})
 
 // Apps tab
 doc.getElementById('whitelist-apps').addEventListener('click', () => {
@@ -318,9 +323,6 @@ window.addEventListener(`DOMContentLoaded`, () => {
         .catch((error) => {
             console.error('Error: ' + error);
         });
-})
-
-window.addEventListener(`DOMContentLoaded`, () => {
     fetch(`../json/jobs.json`)
         .then((response) => response.json())
         .then((data) => {

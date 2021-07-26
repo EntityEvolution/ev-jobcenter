@@ -1,1 +1,1 @@
-Config = Config || {}
+Config = {}
