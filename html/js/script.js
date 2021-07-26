@@ -12,7 +12,9 @@ window.addEventListener('message', (e) => {
             break;
 
         case 'restoreData':
-
+            if (localStorage.getItem('savedBackground') !== undefined) {
+                doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
+            }
             break;
     }
 })

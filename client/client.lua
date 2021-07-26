@@ -56,9 +56,42 @@ RegisterNUICallback('close', function(_, cb)
     if isOpen then
         isOpen = false
         SetNuiFocus(false, false)
-        local location = stNoti()
         --TriggerServerEvent('ev:applyJob', true, 'police', nil, 'LSPD', 'I would be a good member for the team.', '', '', 123456, location)
         stopAnim()
+    end
+    cb({})
+end)
+
+RegisterNUICallback('getDataLocation', function(data, cb)
+    if isOpen then
+        print(data)
+        print(cb)
+        TriggerServerEvent('ev:sendSelectedEndpoint')
+    end
+    cb({})
+end)
+
+RegisterNUICallback('getDataForm', function(data, cb)
+    if isOpen then
+        print(data)
+        print(cb)
+        TriggerServerEvent('ev:sendAdminEndpoint')
+    end
+    cb({})
+end)
+
+RegisterNUICallback('sendAdminMessage', function(_, cb)
+    if isOpen then
+        TriggerServerEvent('ev:sendAllAdmins')
+    end
+    cb({})
+end)
+
+
+
+RegisterNUICallback('sendFormData', function(data, cb)
+    if isOpen then
+        TriggerServerEvent('ev:sendJobEndpoint')
     end
     cb({})
 end)
@@ -213,14 +246,15 @@ function ShowFloatingHelpNotification(message, coords)
     EndTextCommandDisplayHelp(2, false, false, -1)
 end
 
-function stNoti()
-    local stName = 'Not found'
-    local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
-    local stHash = GetStreetNameAtCoord(x, y, z)
-    if (stHash ~= nil) then
-        stName = GetStreetNameFromHashKey(stHash)
-        return stName
-    end
+function stNoti(ped)
+	local coords = GetEntityCoords(ped)
+	local stHash = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
+	if stHash ~= nil then
+		local stName = GetStreetNameFromHashKey(stHash)
+		return stName
+	else
+		return 'Unknown place'
+	end
 end
 
 function startAnim()
@@ -253,3 +287,22 @@ function stopAnim()
 		prop = 0
     end
 end
+
+-- Handlers
+AddEventHandler('playerSpawned', function()
+    if Config.useSuggestion then
+	    TriggerEvent('chat:addSuggestion', '/' .. Config.openCommand, Config.openDesc, {})
+    end
+	Wait(Config.waitSpawn)
+	SendNUIMessage({ action = 'restoreData' })
+end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+	if (GetCurrentResourceName() == resourceName) then
+        if Config.useSuggestion then
+            TriggerEvent('chat:addSuggestion', '/' .. Config.openCommand, Config.openDesc, {})
+        end
+		Wait(Config.waitResource)
+		SendNUIMessage({ action = 'restoreData' })
+	end
+end)

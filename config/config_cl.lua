@@ -15,3 +15,6 @@ Config.useTnotify = false
 Config.tnotifyTitle = 'Job Center'
 Config.tnotifyMessage = 'E | Job Center'
 Config.tnotifySound = true
+
+-- Set data back
+Config.waitSpawn = 3000
