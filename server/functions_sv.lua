@@ -1,7 +1,7 @@
 function checkPerms(xPlayer)
 	local group = xPlayer.getGroup()
     local check
-    if stateEsx then check = Config.esxRanks elseif stateVrp then Config.vrpRanks else return print('No framework found') end
+    if stateEsx then check = Config.esxRanks elseif stateVrp then check = Config.vrpRanks else return print('No framework found') end
 	for _, v in pairs(check) do
 		if v == group then
             return true
