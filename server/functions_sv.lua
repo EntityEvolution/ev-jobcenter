@@ -21,7 +21,7 @@ function sendDiscord(webhook, title, message, image, thumbnail, color)
         {
             ["title"] = title,
             ["thumbnail"] = {
-                ["url"] = thumbnail, 
+                ["url"] = thumbnail,
             },
             ["image"] ={
                 ["url"] = image,

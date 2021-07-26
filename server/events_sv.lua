@@ -23,7 +23,7 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, title, mes
                         print('Whitelisted Job: ' .. jobName)
                         sendDiscord(webhook,
                         '**Job Center Information | ' .. title .. '**',
-                        "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) .. 
+                        "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
                         "```\n __Job Information__\n```Character Name: " .. xPlayer.getName() .. "\nCharacter Job: " .. xPlayer.getJob().label ..
                         "\nCharacter Job Rank: " .. xPlayer.getJob().grade_label .. "\nCharacter Sex: "
                         .. xPlayer.get('sex') .. "\nCharacter DOB: " .. xPlayer.get('dateofbirth') .. "\nCharacter Height: " .. xPlayer.get('height') ..
