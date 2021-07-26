@@ -31,6 +31,6 @@ files {
     'html/img/backgrounds/*.jpg',
     'html/img/apps/*.png',
     'html/fonts/*.ttf',
-    'html/css/tablet.min.css',
+    'html/css/*.css',
     'html/js/*.js'
 }

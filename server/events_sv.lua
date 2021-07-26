@@ -82,7 +82,7 @@ end)
 
 RegisterNetEvent('ev:sendAdminEndpoint', function(prevent, subject, discord, title, description)
     if prevent then
-
+        sendDiscord(webhook, )
     else
         print('Hacker')
     end
