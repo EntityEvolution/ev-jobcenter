@@ -232,7 +232,7 @@ function progressNoti(message, sec) {
     if (i == 0) {
         text.textContent = '\xa0\xa0' + message
         if (sec === undefined && i == 0) {
-            sec = 5
+            sec = Config.defaultTime
         }
         i = 1;
         const fadeNoti = (anim, opacity) => {
@@ -292,7 +292,7 @@ function wQuestion(data) {
             elementClicked.setAttribute('listener', 'true');
             const q = doc.getElementById('whitelist-val').value
             if (!q) {
-                progressNoti('No message posted')
+                progressNoti(Config.WhitelistNoMessage, Config.WhitelistNoMessageTime)
             } else {
                 progressNoti('Message sent')
                 wquest.style.opacity = '0';
@@ -314,7 +314,6 @@ function wQuestion(data) {
             }, 600)
         })
     }
-
 }
 
 window.addEventListener(`DOMContentLoaded`, () => {
@@ -338,46 +337,63 @@ window.addEventListener(`DOMContentLoaded`, () => {
 
 function createJobs(data) {
     const cont = doc.getElementById('jobs-container');
-    const contWhitelist = doc.getElementById('whitelist-container')
+    const contWhitelist = doc.getElementById('whitelist-container');
     data.forEach(dataItem => {
+        const divMain = doc.createElement('div');
+        const divImage = doc.createElement('div');
+        const imageJob = doc.createElement('img');
+        const imageTitle = doc.createElement('span');
+        const divLocation = doc.createElement('div');
+        const locationTitle = doc.createElement('span');
+        const locationText = doc.createElement('span');
+        const divDesc = doc.createElement('div');
+        const descTitle = doc.createElement('span');
+        const descText = doc.createElement('span');
+        const divBtn = doc.createElement('div');
+        const btn = doc.createElement('button');
+
+        divMain.classList.add('job-slide-container');
+        divImage.classList.add('slide-image-container');
+        imageJob.classList.add('slide-image');
+        imageTitle.classList.add('image-title');
+        divLocation.classList.add('slide-location-container');
+        locationTitle.classList.add('def-title');
+        locationText.classList.add('def-text', 'loc');
+        divDesc.classList.add('slide-desc-container');
+        descTitle.classList.add('def-title');
+        descText.classList.add('def-text');
+        divBtn.classList.add('slide-btn-container');
+        btn.classList.add('jobs-btn');
+
+        imageJob.src = dataItem.imageJob;
+        imageJob.setAttribute("loading", "lazy")
+        imageTitle.innerHTML = dataItem.imageTitle;
+        locationTitle.innerHTML = dataItem.locationTitle;
+        locationText.innerHTML = dataItem.locationDescription;
+        descTitle.innerHTML = dataItem.descTitle;
+        descText.innerHTML = dataItem.descDescription;
+        btn.innerHTML = dataItem.buttonText;
+        btn.id = dataItem.job;
+
+        locationText.addEventListener('click', () => {
+            fetchNUI('getDataLocation', dataItem.locationCoords),
+            progressNoti(dataItem.locationNotification, 1.5);
+        });
+
+        divBtn.appendChild(btn);
+        divDesc.appendChild(descTitle);
+        divDesc.appendChild(descText);
+        divLocation.appendChild(locationTitle);
+        divLocation.appendChild(locationText);
+
+        divImage.appendChild(imageJob);
+        divImage.appendChild(imageTitle);
+
+        divMain.appendChild(divImage);
+        divMain.appendChild(divLocation);
+        divMain.appendChild(divDesc);
+        divMain.appendChild(divBtn);
         if (JSON.parse(dataItem.whitelist)) {
-            const divMain = doc.createElement('div');
-            const divImage = doc.createElement('div');
-            const imageJob = doc.createElement('img');
-            const imageTitle = doc.createElement('span');
-            const divLocation = doc.createElement('div');
-            const locationTitle = doc.createElement('span');
-            const locationText = doc.createElement('span');
-            const divDesc = doc.createElement('div');
-            const descTitle = doc.createElement('span');
-            const descText = doc.createElement('span');
-            const divBtn = doc.createElement('div');
-            const btn = doc.createElement('button');
-
-
-            divMain.classList.add('job-slide-container');
-            divImage.classList.add('slide-image-container');
-            imageJob.classList.add('slide-image');
-            imageTitle.classList.add('image-title');
-            divLocation.classList.add('slide-location-container');
-            locationTitle.classList.add('def-title');
-            locationText.classList.add('def-text', 'loc');
-            divDesc.classList.add('slide-desc-container');
-            descTitle.classList.add('def-title');
-            descText.classList.add('def-text');
-            divBtn.classList.add('slide-btn-container');
-            btn.classList.add('jobs-btn');
-
-            imageJob.src = dataItem.imageJob;
-            imageJob.setAttribute("loading", "lazy")
-            imageTitle.innerHTML = dataItem.imageTitle;
-            locationTitle.innerHTML = dataItem.locationTitle;
-            locationText.innerHTML = dataItem.locationDescription;
-            descTitle.innerHTML = dataItem.descTitle;
-            descText.innerHTML = dataItem.descDescription;
-            btn.innerHTML = dataItem.buttonText;
-            btn.id = dataItem.job;
-
             btn.addEventListener('click', () => {
                 wquest.style.display='block';
                 setTimeout(function() {
@@ -385,84 +401,14 @@ function createJobs(data) {
                 }, 100)
                 wQuestion(dataItem);
             });
-            locationText.addEventListener('click', () => {
-                fetchNUI('getDataLocation', dataItem.locationCoords),
-                progressNoti(dataItem.locationNotification, 1.5);
-            });
-            divBtn.appendChild(btn);
-            divDesc.appendChild(descTitle);
-            divDesc.appendChild(descText);
-            divLocation.appendChild(locationTitle);
-            divLocation.appendChild(locationText);
 
-            divImage.appendChild(imageJob);
-            divImage.appendChild(imageTitle);
-
-            divMain.appendChild(divImage);
-            divMain.appendChild(divLocation);
-            divMain.appendChild(divDesc);
-            divMain.appendChild(divBtn);
             contWhitelist.appendChild(divMain);
         } else {
-            const divMain = doc.createElement('div');
-            const divImage = doc.createElement('div');
-            const imageJob = doc.createElement('img');
-            const imageTitle = doc.createElement('span');
-            const divLocation = doc.createElement('div');
-            const locationTitle = doc.createElement('span');
-            const locationText = doc.createElement('span');
-            const divDesc = doc.createElement('div');
-            const descTitle = doc.createElement('span');
-            const descText = doc.createElement('span');
-            const divBtn = doc.createElement('div');
-            const btn = doc.createElement('button');
-
-
-            divMain.classList.add('job-slide-container');
-            divImage.classList.add('slide-image-container');
-            imageJob.classList.add('slide-image');
-            imageTitle.classList.add('image-title');
-            divLocation.classList.add('slide-location-container');
-            locationTitle.classList.add('def-title');
-            locationText.classList.add('def-text', 'loc');
-            divDesc.classList.add('slide-desc-container');
-            descTitle.classList.add('def-title');
-            descText.classList.add('def-text');
-            divBtn.classList.add('slide-btn-container');
-            btn.classList.add('jobs-btn');
-
-            imageJob.src = dataItem.imageJob;
-            imageJob.setAttribute("loading", "lazy")
-            imageTitle.innerHTML = dataItem.imageTitle;
-            locationTitle.innerHTML = dataItem.locationTitle;
-            locationText.innerHTML = dataItem.locationDescription;
-            descTitle.innerHTML = dataItem.descTitle;
-            descText.innerHTML = dataItem.descDescription;
-            btn.innerHTML = dataItem.buttonText;
-            btn.id = dataItem.job;
-
             btn.addEventListener('click', () => {
                 fetchNUI('setDataJob', {whitelisted: dataItem.whitelist, job: dataItem.job, grade: dataItem.grade}),
                 progressNoti(dataItem.buttonNotification, 1.5);
             });
-            locationText.addEventListener('click', () => {
-                fetchNUI('getDataLocation', dataItem.locationCoords),
-                progressNoti(dataItem.locationNotification, 1.5);
-            });
 
-            divBtn.appendChild(btn);
-            divDesc.appendChild(descTitle);
-            divDesc.appendChild(descText);
-            divLocation.appendChild(locationTitle);
-            divLocation.appendChild(locationText);
-
-            divImage.appendChild(imageJob);
-            divImage.appendChild(imageTitle);
-
-            divMain.appendChild(divImage);
-            divMain.appendChild(divLocation);
-            divMain.appendChild(divDesc);
-            divMain.appendChild(divBtn);
             cont.appendChild(divMain);
         }
     });
