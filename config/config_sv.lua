@@ -1,4 +1,4 @@
-Config = Config or {}
+Config = {}
 
 Config.defaultWebhook = 'https://discord.com/api/webhooks/857881427387744256/pum3fgHQKZB5cXLLNb6eIK-_vYA4U17tWm9RbeFJMs1NlGF3tte3oJiClXoYv7ahq10G'
 Config.adminWebhook = ''
