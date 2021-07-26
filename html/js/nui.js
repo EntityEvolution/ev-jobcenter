@@ -310,7 +310,7 @@ function wQuestion(data) {
 }
 
 window.addEventListener(`DOMContentLoaded`, () => {
-    fetch(`../html/json/backgrounds.json`)
+    fetch(`../json/backgrounds.json`)
         .then((response) => response.json())
         .then((data) => {
             createOptions(data);
@@ -321,7 +321,7 @@ window.addEventListener(`DOMContentLoaded`, () => {
 })
 
 window.addEventListener(`DOMContentLoaded`, () => {
-    fetch(`../html/json/jobs.json`)
+    fetch(`../json/jobs.json`)
         .then((response) => response.json())
         .then((data) => {
             createJobs(data);
