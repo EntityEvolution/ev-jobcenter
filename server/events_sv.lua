@@ -67,11 +67,13 @@ RegisterNetEvent('ev:sendAllAdmins', function(prevent)
             for i=1, #xPlayers, 1 do
                 local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
                 if checkPerms(xPlayer) then
-                    print(xPlayer)
+                    print(xPlayers[i])
+                    return
                 end
             end
         elseif stateVrp then
 
+            return
         else
             return print('No framework found')
         end
@@ -80,10 +82,16 @@ RegisterNetEvent('ev:sendAllAdmins', function(prevent)
     end
 end)
 
-RegisterNetEvent('ev:sendAdminEndpoint', function(prevent, subject, discord, title, description)
+RegisterNetEvent('ev:sendAdminEndpoint', function(prevent, subject, discord, topic, description)
     if prevent then
-        sendDiscord(Config.adminWebhook, title, message, image, thumbnail, color)
+        sendDiscord(Config.adminWebhook, 
+        '*Bugs Form Information | Subject:**' .. subject, 
+        "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
+        "\n __About__\n```Discord Name: " .. discord .. "\nTopic: " .. topic .. "\nDescription: " .. description .. "```", 
+        image,
+        thumbnail,
+        color)
     else
-        print('Hacker')
+        print('Hacker most likely')
     end
 end)

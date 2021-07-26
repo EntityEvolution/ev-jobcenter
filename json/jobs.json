@@ -28,7 +28,10 @@
         "descTitle" : "Description",
         "descDescription" : "ob of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk",
         "buttonText" : "Apply",
-        "buttonNotification" : "You have applied to the LSPD"
+        "buttonNotification" : "You have applied to the LSPD",
+        "discordImage" : "",
+        "discordThumbnail" : "",
+        "discordColor" : ""
     },
 
     {

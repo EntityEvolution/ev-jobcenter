@@ -84,14 +84,14 @@ end)
 
 RegisterNUICallback('sendFormData', function(data, cb)
     if isOpen then
-        TriggerServerEvent('ev:applyJob', data.whitelist, data.job, data.grade, data.title, data.message)
+        TriggerServerEvent('ev:applyJob', toboolean(data.whitelisted), data.job, tonumber(data.grade), data.title, data.message, data.image, data.thumbnail, tonumber(data.color), currentLocation)
     end
     cb({})
 end)
 
 RegisterNUICallback('setDataJob', function(data, cb)
     if isOpen then
-        TriggerServerEvent('ev:applyJob', data.whitelist, data.job, data.grade)
+        TriggerServerEvent('ev:applyJob', data.whitelisted, data.job, data.grade)
     end
     cb({})
 end)

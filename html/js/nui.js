@@ -298,7 +298,7 @@ function wQuestion(data) {
                 setTimeout(function() {
                     wquest.style.display='none';
                 }, 600)
-                fetchNUI('sendFormData', {whitelisted: data.whitelist, job: data.job, grade: data.grade, title: data.imageTitle, message: q})
+                fetchNUI('sendFormData', {whitelisted: data.whitelist, job: data.job, grade: data.grade, title: data.imageTitle, message: q, image: data.discordImage, thumbnail: data.discordThumbnail, color: data.discordColor})
             }
         })
     }
