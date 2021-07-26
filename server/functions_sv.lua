@@ -1,3 +1,6 @@
+local stateEsx = stateEsx
+local stateVrp = stateVrp
+
 function checkPerms(xPlayer)
 	local group = xPlayer.getGroup()
     local check

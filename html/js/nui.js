@@ -75,8 +75,7 @@ accept.addEventListener('click', () => {
     doc.getElementById('url-link').style.display = 'none';
     doc.getElementById('settings').style.height = '28%';
     doc.getElementById('settings-selection').value = 'default';
-    console.log('a')
-    progressNoti('Saved background', 3);
+    progressNoti(Config.AppliedBackground, Config.AppliedBackgroundTime);
 })
 
 cancel.addEventListener('click', () => {
@@ -88,7 +87,7 @@ cancel.addEventListener('click', () => {
 
 save.addEventListener('click', () => {
     localStorage.setItem('savedBackground', doc.getElementById('tablet-background').src);
-    progressNoti('Saved background!', 3)
+    progressNoti(Config.SavedBackground, Config.SavedBackgroundTime)
 })
 
 // Apps tab
@@ -146,7 +145,7 @@ doc.getElementById('bugs-accept').addEventListener('click', ()=> {
     setTimeout(function() {
         bquest.style.opacity='none';
     }, 600)
-    progressNoti('Administrators have received your message', 5)
+    progressNoti(Config.AdminMessage, Config.AdminMessageTime)
 })
 
 doc.getElementById('bugs-cancel').addEventListener('click', () => {
@@ -162,7 +161,7 @@ submit.addEventListener('click', ()=> {
     let data = [];
     for (let i = 0; i < cls.length; i++) {
         if (!cls[i].value) {
-            progressNoti('Data is missing', 3)
+            progressNoti(Config.SubmitData, Config.SubmitDataTime)
             return
         } else {
             data.push(cls[i].value)
@@ -294,7 +293,7 @@ function wQuestion(data) {
             if (!q) {
                 progressNoti(Config.WhitelistNoMessage, Config.WhitelistNoMessageTime)
             } else {
-                progressNoti('Message sent')
+                progressNoti(Config.WhitelistMessage, Config.WhitelistMessageTime)
                 wquest.style.opacity = '0';
                 setTimeout(function() {
                     wquest.style.display='none';
@@ -377,7 +376,7 @@ function createJobs(data) {
 
         locationText.addEventListener('click', () => {
             fetchNUI('getDataLocation', dataItem.locationCoords),
-            progressNoti(dataItem.locationNotification, 1.5);
+            progressNoti(dataItem.locationNotification, Config.LocationTime);
         });
 
         divBtn.appendChild(btn);
@@ -406,7 +405,7 @@ function createJobs(data) {
         } else {
             btn.addEventListener('click', () => {
                 fetchNUI('setDataJob', {whitelisted: dataItem.whitelist, job: dataItem.job, grade: dataItem.grade}),
-                progressNoti(dataItem.buttonNotification, 1.5);
+                progressNoti(dataItem.buttonNotification, Config.JobTime);
             });
 
             cont.appendChild(divMain);
