@@ -205,7 +205,6 @@ function showNoti()
         end
     end
 end
-<<<<<<< HEAD
 
 -- Functions
 function getDayText()
@@ -303,5 +302,3 @@ function stopAnim()
 		prop = 0
     end
 end
-=======
->>>>>>> b68088f7a16874bda0369e57d7eef37d0ac4b4d0
