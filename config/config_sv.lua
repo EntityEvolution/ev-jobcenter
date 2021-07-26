@@ -8,3 +8,13 @@ Config.defaultColor = 123456
 Config.defaultImage = ''
 
 Config.defaultThumbnail = "https://imgur.com/eXf46pc.png"
+
+-- ESX Ranks
+Config.esxRanks = {
+    'admin'
+}
+
+-- VRP Ranks
+Config.vrpRanks {
+    'admin'
+}

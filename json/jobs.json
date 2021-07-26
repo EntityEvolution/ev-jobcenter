@@ -2,6 +2,7 @@
     {
         "whitelist" : "false",
         "job" : "ambulance",
+        "grade" : "0",
         "imageJob" : "https://content.invisioncic.com/u301062/monthly_2021_03/large.1240773322_FiveM-StatewideRoleplay_Server1_WhitelistedCommunity_Apply@statewiderp.net11_03_20212_17_52PM(2).png.764d9d4a29cdadb807ffa50a3b914fe6.png",
         "imageTitle" : "Ambulance",
         "locationTitle" : "Location",
@@ -17,6 +18,7 @@
     {
         "whitelist" : "true",
         "job" : "ambulance",
+        "grade" : "0",
         "imageJob" : "https://content.invisioncic.com/u301062/monthly_2021_03/large.1240773322_FiveM-StatewideRoleplay_Server1_WhitelistedCommunity_Apply@statewiderp.net11_03_20212_17_52PM(2).png.764d9d4a29cdadb807ffa50a3b914fe6.png",
         "imageTitle" : "Police",
         "locationTitle" : "Location",
@@ -32,6 +34,7 @@
     {
         "whitelist" : "true",
         "job" : "police",
+        "grade" : "0",
         "imageJob" : "https://content.invisioncic.com/u301062/monthly_2021_03/large.1240773322_FiveM-StatewideRoleplay_Server1_WhitelistedCommunity_Apply@statewiderp.net11_03_20212_17_52PM(2).png.764d9d4a29cdadb807ffa50a3b914fe6.png",
         "imageTitle" : "Ambulance",
         "locationTitle" : "Location",

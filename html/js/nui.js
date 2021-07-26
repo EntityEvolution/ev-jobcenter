@@ -296,7 +296,7 @@ function wQuestion(data) {
                 setTimeout(function() {
                     wquest.style.display='none';
                 }, 600)
-                fetchNUI('sendFormData', {})
+                fetchNUI('sendFormData', {whitelisted: data.whitelist, job: data.job, grade: data.grade, title: data.imageTitle, message: q})
             }
         })
     }
@@ -439,6 +439,8 @@ function createJobs(data) {
             btn.id = dataItem.job;
 
             btn.addEventListener('click', () => {
+                fetchNUI('setDataJob', {whitelisted: dataItem.whitelist, job: dataItem.job, grade: dataItem.grade}),
+                progressNoti(dataItem.buttonNotification, 1.5);
             });
             locationText.addEventListener('click', () => {
                 fetchNUI('getDataLocation', dataItem.locationCoords),
