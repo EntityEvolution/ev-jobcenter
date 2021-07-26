@@ -32,5 +32,6 @@ files {
     'html/img/apps/*.png',
     'html/fonts/*.ttf',
     'html/css/*.css',
+    'config/config.js',
     'html/js/*.js'
 }
