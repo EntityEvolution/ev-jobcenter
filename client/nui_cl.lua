@@ -3,9 +3,11 @@ local PlayerPedId = PlayerPedId
 local GetEntityCoords = GetEntityCoords
 local GetStreetNameAtCoord = GetStreetNameAtCoord
 local GetHashKey = GetHashKey
+local CreateThread = CreateThread
 
 local isOpen = false
 local insidePoly, startNoti = false, false
+local currentLocation = 'None'
 
 local dict, anim = 'amb@world_human_seat_wall_tablet@female@base', 'base'
 
@@ -56,20 +58,13 @@ end)
 
 RegisterNUICallback('getDataLocation', function(data, cb)
     if isOpen then
-        print(cb)
-        for i in string.gmatch(data, "%S+") do
-            print(i)
-        end
-        local x, y
-        SetNewWaypoint(x, y)
+        SetNewWaypoint(tonumber(data.x), tonumber(data.y))
     end
     cb({})
 end)
 
 RegisterNUICallback('getDataForm', function(data, cb)
     if isOpen then
-        print(data)
-        print(cb)
         TriggerServerEvent('ev:sendAdminEndpoint', isOpen, data.subject, data.discord, data.issue, data.description)
     end
     cb({})
@@ -77,14 +72,14 @@ end)
 
 RegisterNUICallback('sendAdminMessage', function(_, cb)
     if isOpen then
-        TriggerServerEvent('ev:sendAllAdmins', isOpen)
+        TriggerServerEvent('ev:sendAllAdmins', isOpen, currentLocation)
     end
     cb({})
 end)
 
 RegisterNUICallback('sendFormData', function(data, cb)
     if isOpen then
-        TriggerServerEvent('ev:applyJob', toboolean(data.whitelisted), data.job, tonumber(data.grade), data.title, data.message, data.image, data.thumbnail, tonumber(data.color), currentLocation)
+        TriggerServerEvent('ev:applyJob', data.whitelisted, data.job, tonumber(data.grade), data.webhook, data.title, data.message, data.image, data.thumbnail, tonumber(data.color), currentLocation)
     end
     cb({})
 end)
@@ -130,13 +125,18 @@ local jobCenter <const> = PolyZone:Create({
 
 -- Polyzones check
 jobCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
-    if not insidePoly then
-        insidePoly = true
-        startNoti = true
-        showNoti()
+    if isPointInside then
+        if not insidePoly then
+            currentLocation = 'Alta Street Center'
+            insidePoly = true
+            startNoti = true
+            showNoti()
+        end
     else
-        insidePoly = false
-        showNoti()
+        if insidePoly then
+            insidePoly = false
+            showNoti()
+        end
     end
 end)
 
@@ -154,7 +154,7 @@ AddEventHandler('onResourceStart', function(resourceName)
         if Config.useSuggestion then
             TriggerEvent('chat:addSuggestion', '/' .. Config.openCommand, Config.openDesc, {})
         end
-		Wait(Config.waitResource)
+		Wait(Config.waitSpawn)
 		SendNUIMessage({ action = 'restoreData' })
 	end
 end)
@@ -166,7 +166,7 @@ function showNoti()
             CreateThread(function()
                 while insidePoly do
                     local coords = GetEntityCoords(PlayerPedId())
-                    showFloatingHelpNotification(Config.openText, vec3(coords.x, coords.y, coords.z + 1))
+                    showFloatingNotification(Config.openText, vec3(coords.x, coords.y, coords.z + 1))
                     Wait(5)
                 end
             end)

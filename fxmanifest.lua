@@ -4,7 +4,7 @@ game 'gta5'
 
 lua54 'yes'
 
-description 'A simple ESX job center created by Entity Evolution'
+description 'A simple job center created by Entity Evolution'
 
 version '0.0.1'
 
@@ -24,7 +24,7 @@ ui_page 'html/ui.html'
 
 files {
     'html/ui.html',
-    'html/json/*.json',
+    'json/*.json',
     'html/img/tablet/*.png',
     'html/img/tablet/*.jpg',
     'html/img/backgrounds/*.png',

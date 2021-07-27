@@ -35,3 +35,47 @@ function sendDiscord(webhook, title, message, image, thumbnail, color)
     }
     return PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({ username = username, embeds = embeds, avatar_url = avatar_url}), { ['Content-Type'] = 'application/json' })
 end
+
+function getIdentifiers(target)
+    local identifiers = {
+        license = 'Not found',
+        xbl = 'Not found',
+        live = 'Not found',
+        discord = 'Not found',
+        license2 = 'Not found',
+        ip = 'Not found',
+        fivem = 'Not found',
+        steam = 'Not found'
+    }
+
+    local function match(total, identifier)
+        local match = string.match(total, identifier)
+        return match
+    end
+
+    local function cut(total, identifier)
+        local cut = string.gsub(total, identifier, '')
+        return cut
+    end
+
+    for k, v in ipairs(GetPlayerIdentifiers(target)) do
+        if match(v, 'license') and not match(v, 'license2:') then
+            identifiers.license = cut(v, 'license:')
+        elseif match(v, 'xbl') then
+            identifiers.xbl = cut(v, 'xbl:')
+        elseif match(v, 'live') then
+            identifiers.live = cut(v, 'live:')
+        elseif match(v, 'discord') then
+            identifiers.discord = cut(v, 'discord:')
+        elseif match(v, 'license2') then
+            identifiers.license2 = cut(v, 'license2:')
+        elseif match(v, 'ip') then
+            identifiers.ip = cut(v, 'ip:')
+        elseif match(v, 'fivem') then
+            identifiers.fivem = cut(v, 'fivem:')
+        elseif match(v, 'steam') then
+            identifiers.steam = cut(v, 'steam:')
+        end
+    end
+    return identifiers
+end

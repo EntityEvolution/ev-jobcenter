@@ -1,5 +1,5 @@
 Config = {}
-Config.devMode = true
+Config.devMode = false
 
 // All Notifications + Their time in sec
 Config.defaultTime = 3

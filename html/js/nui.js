@@ -168,6 +168,11 @@ submit.addEventListener('click', ()=> {
         }
     }
     fetchNUI('getDataForm', {subject: subject, discord: data[0], issue: data[1], description: data[2]})
+    for (let i = 0; i < cls.length; i++) {
+        if (cls[i].value) {
+            cls[i].value = '';
+        }
+    }
 })
 
 // Apps
@@ -264,7 +269,9 @@ function progressNoti(message, sec) {
                 }
             }
         } else {
-            console.log('Currently Active')
+            if (Config.devMode) {
+                console.log('Currently Active')
+            }
         }
     }
 }
@@ -277,7 +284,7 @@ const fetchNUI = async (cbname, data) => {
         },
         body: JSON.stringify(data)
     };
-    const resp = await fetch(`https://ev-jobcenter-esx/${cbname}`, options);
+    const resp = await fetch(`https://ev-jobcenter/${cbname}`, options);
     return await resp.json();
 }
 
@@ -298,7 +305,7 @@ function wQuestion(data) {
                 setTimeout(function() {
                     wquest.style.display='none';
                 }, 600)
-                fetchNUI('sendFormData', {whitelisted: data.whitelist, job: data.job, grade: data.grade, title: data.imageTitle, message: q, image: data.discordImage, thumbnail: data.discordThumbnail, color: data.discordColor})
+                fetchNUI('sendFormData', {whitelisted: JSON.parse(data.whitelist), job: data.job, grade: data.grade, webhook: data.discordWebhook, title: data.imageTitle, message: q, image: data.discordImage, thumbnail: data.discordThumbnail, color: data.discordColor})
             }
         })
     }
@@ -376,7 +383,7 @@ function createJobs(data) {
         btn.id = dataItem.job;
 
         locationText.addEventListener('click', () => {
-            fetchNUI('getDataLocation', dataItem.locationCoords),
+            fetchNUI('getDataLocation', {x: dataItem.locationCoordsX, y: dataItem.locationCoordsY}),
             progressNoti(dataItem.locationNotification, Config.LocationTime);
         });
 
@@ -405,7 +412,7 @@ function createJobs(data) {
             contWhitelist.appendChild(divMain);
         } else {
             btn.addEventListener('click', () => {
-                fetchNUI('setDataJob', {whitelisted: dataItem.whitelist, job: dataItem.job, grade: dataItem.grade}),
+                fetchNUI('setDataJob', {whitelisted: JSON.parse(dataItem.whitelist), job: dataItem.job, grade: dataItem.grade}),
                 progressNoti(dataItem.buttonNotification, Config.JobTime);
             });
 

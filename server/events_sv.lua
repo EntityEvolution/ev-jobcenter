@@ -1,5 +1,5 @@
-stateVrp = GetResourceState('es_extended') == 'Started'
-stateEsx = GetResourceState('vrp') == 'Started'
+stateVrp = GetResourceState('vrp') == 'started'
+stateEsx =  GetResourceState('es_extended') == 'started' or GetResourceState('extendedmode') == 'started'
 
 local stateVrp = stateVrp
 local stateEsx = stateEsx
@@ -10,7 +10,7 @@ if stateEsx then
 end
 
 
-RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, title, message, image, thumbnail, color, location)
+RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, webhook, title, message, image, thumbnail, color, location)
     local source <const> = source
     local xPlayer = ESX.GetPlayerFromId(source)
     if stateEsx then
@@ -20,7 +20,6 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, title, mes
                     if xPlayer.getJob().name ~= jobName then
                         if title == nil then title = 'Not Found' end
                         if message == nil then message = 'None' end
-                        print('Whitelisted Job: ' .. jobName)
                         sendDiscord(webhook,
                         '**Job Center Information | ' .. title .. '**',
                         "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
@@ -33,8 +32,6 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, title, mes
                         color)
                         return
                     else
-                        print(jobName)
-                        print(xPlayer.getJob().name)
                         return
                     end
                 end
@@ -42,10 +39,7 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, title, mes
                 if ESX.DoesJobExist(jobName, grade) then
                     if xPlayer.getJob().name ~= jobName then
                         xPlayer.setJob(jobName, grade)
-                        print(jobName)
                     else
-                        print(jobName)
-                        print(xPlayer.getJob().name)
                         return
                     end
                 end
@@ -60,15 +54,18 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, title, mes
     end
 end)
 
-RegisterNetEvent('ev:sendAllAdmins', function(prevent)
+RegisterNetEvent('ev:sendAllAdmins', function(prevent, location)
     if prevent then
         if stateEsx then
             local xPlayers = ESX.GetPlayers()
             for i=1, #xPlayers, 1 do
                 local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
                 if checkPerms(xPlayer) then
-                    print(xPlayers[i])
-                    return
+                    TriggerClientEvent('chat:addMessage', xPlayers[i], {
+                        color = { 255, 0, 0},
+                        multiline = true,
+                        args = {"Job Center Help", "The id " .. source .. " requested help at the job center named: " .. location}
+                      })                      
                 end
             end
         elseif stateVrp then
@@ -83,11 +80,16 @@ RegisterNetEvent('ev:sendAllAdmins', function(prevent)
 end)
 
 RegisterNetEvent('ev:sendAdminEndpoint', function(prevent, subject, discord, topic, description)
+    local source <const> = source
     if prevent then
+        local id = getIdentifiers(source)
         sendDiscord(Config.adminWebhook, 
-        '*Bugs Form Information | Subject:**' .. subject, 
+        '**Bugs Form Information | Subject: ' .. subject .. "**", 
         "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
-        "\n __About__\n```Discord Name: " .. discord .. "\nTopic: " .. topic .. "\nDescription: " .. description .. "```", 
+        "```\n__About__\n```Discord Name: " .. discord .. "\nTopic: " .. topic .. "\nDescription: " .. description .. "```" ..
+        "\n __Player identifiers__\n```License: "  .. id.license .. 
+        "\nLicense2: ".. id.license2 .. "\nXbl: " .. id.xbl .. "\nLive: " .. id.live .. "\nDiscord: " .. id.discord .. "\nSteamHex: " ..
+        id.steam .. "\nFivem: " .. id.fivem .. "\nIP: " .. id.ip .. "```", 
         image,
         thumbnail,
         color)

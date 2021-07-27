@@ -1,6 +1,6 @@
 [
     {
-        "whitelist" : "false",
+        "whitelist" : "true",
         "job" : "ambulance",
         "grade" : "0",
         "imageJob" : "https://i.pinimg.com/originals/e4/4f/bc/e44fbc7c3f95edc7888be2cd11aa3cae.jpg",
@@ -8,13 +8,18 @@
         "locationTitle" : "Location",
         "locationDescription" : "Misson Row",
         "locationNotification" : "Location has been marked!",
-        "locationCoords" : "10 10",
+        "locationCoordsX" : "428.2722",
+        "locationCoordsY" : "-982.1610",
         "descTitle" : "Description",
         "descDescription" : "A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk",
         "buttonText" : "Apply",
-        "buttonNotification" : "You have applied to the LSFD"
+        "buttonNotification" : "You have applied to the LSFD",
+        "discordWebhook" : "https://discord.com/api/webhooks/869476173468532736/S5v4NtUukcAsRXOtmPyBh06rmkwjCaVc-XYqGtCOJmYpPkpOG5vUuGlz8rm795a3th7n",
+        "discordImage" : "",
+        "discordThumbnail" : "",
+        "discordColor" : ""
     },
-    
+
     {
         "whitelist" : "true",
         "job" : "police",
@@ -24,14 +29,16 @@
         "locationTitle" : "Location",
         "locationDescription" : "Misson Row",
         "locationNotification" : "Location has been marked!",
-        "locationCoords" : "10 10",
+        "locationCoordsX" : "428.2722",
+        "locationCoordsY" : "-982.1610",
         "descTitle" : "Description",
         "descDescription" : "ob of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk",
         "buttonText" : "Apply",
         "buttonNotification" : "You have applied to the LSPD",
-        "discordImage" : "",
-        "discordThumbnail" : "",
-        "discordColor" : ""
+        "discordWebhook" : "https://discord.com/api/webhooks/869476173468532736/S5v4NtUukcAsRXOtmPyBh06rmkwjCaVc-XYqGtCOJmYpPkpOG5vUuGlz8rm795a3th7n",
+        "discordImage" : "https://imgur.com/eXf46pc.png",
+        "discordThumbnail" : "https://imgur.com/eXf46pc.png",
+        "discordColor" : "1127128"
     },
 
     {
@@ -43,10 +50,15 @@
         "locationTitle" : "Location",
         "locationDescription" : "Burton",
         "locationNotification" : "Location has been marked!",
-        "locationCoords" : "10 10",
+        "locationCoordsX" : "428.2722",
+        "locationCoordsY" : "-982.1610",
         "descTitle" : "Description",
         "descDescription" : "ob of something idk A simple job of something idk A simple job of something idk A simple job of something idk A simple job of something idk",
         "buttonText" : "Apply",
-        "buttonNotification" : "You have applied to the LSC"
+        "buttonNotification" : "You have applied to the LSC",
+        "discordWebhook" : "https://discord.com/api/webhooks/869476173468532736/S5v4NtUukcAsRXOtmPyBh06rmkwjCaVc-XYqGtCOJmYpPkpOG5vUuGlz8rm795a3th7n",
+        "discordImage" : "",
+        "discordThumbnail" : "",
+        "discordColor" : ""
     }
 ]
