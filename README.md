@@ -27,3 +27,23 @@ This project does not contain a license, therefore you are not allowed to add on
 - Save background.
 - Discord webhook.
 - Multiple jobcenters.
+
+## Documentation
+- Creating New Jobs
+1) Go to the JSON/jobs.json
+2) Copy a block and paste a block at the bottom.
+3) Fix errors with commas and parenthesis.
+4) Update all texts to match your new job.
+5) Choose if you want whitelisted or not.
+6) Restart the resource.
+
+- Creating New Backgrounds
+1) Go to the JSON/backgrounds.json
+2) Copy a block and paste a block at the bottom.
+3) Fix errors with commas and parenthesis.
+4) Add your link to the image and the text to display
+
+- Creating New Rules
+1) Go to html/ui.html
+2) Check comments inside file.
+3) Good luck lmao (if you need help contact me on discord.
