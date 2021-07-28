@@ -110,7 +110,7 @@ end)
 RegisterKeyMapping(Config.openCommand, Config.openDesc, 'keyboard', Config.openKey)
 
 -- Polyzones
-local jobCenter <const> = PolyZone:Create({
+local altaStreet <const> = PolyZone:Create({
     vector2(-260.07339477539, -967.36651611328),
     vector2(-265.25463867188, -969.923828125),
     vector2(-269.91510009766, -960.05834960938),
@@ -123,8 +123,94 @@ local jobCenter <const> = PolyZone:Create({
     debugPoly = false
 })
 
+local rockfordHills = PolyZone:Create({
+    vector2(-538.44116210938, -205.78407287598),
+    vector2(-547.62341308594, -210.87921142578),
+    vector2(-550.8525390625, -205.14837646484),
+    vector2(-540.58355712891, -199.49227905273)
+}, {
+    name="89778966789",
+    minZ = 37.439758300781,
+    maxZ = 39.192123413086,
+    lazyGrid = true,
+    debugPoly = false
+})
+
+ local paletoBlvd = PolyZone:Create({
+    vector2(-249.66346740723, 6331.0620117188),
+    vector2(-245.70455932617, 6327.103515625),
+    vector2(-243.67091369629, 6329.7387695313),
+    vector2(-247.00811767578, 6333.8833007813)
+}, {
+    name="PaletoCentrt",
+    minZ = 31.426193237305,
+    maxZ = 33.869457244873,
+    lazyGrid = true,
+    debugPoly = false
+})
+
+local aiportCenter = PolyZone:Create({
+    vector2(-1042.5568847656, -2748.4223632813),
+    vector2(-1044.9135742188, -2747.1115722656),
+    vector2(-1047.1583251953, -2751.1979980469),
+    vector2(-1044.8494873047, -2752.5329589844)
+}, {
+    name="airport",
+    minZ = 20.363418579102,
+    maxZ = 22.363437652588
+})
+
+aiportCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
+    if isPointInside then
+        if not insidePoly then
+            currentLocation = 'Airport Center'
+            insidePoly = true
+            startNoti = true
+            showNoti()
+        end
+    else
+        if insidePoly then
+            insidePoly = false
+            showNoti()
+        end
+    end
+end)
+
+
+paletoBlvd:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
+    if isPointInside then
+        if not insidePoly then
+            currentLocation = 'Paleto Blvd Center'
+            insidePoly = true
+            startNoti = true
+            showNoti()
+        end
+    else
+        if insidePoly then
+            insidePoly = false
+            showNoti()
+        end
+    end
+end)
+
+rockfordHills:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
+    if isPointInside then
+        if not insidePoly then
+            currentLocation = 'Rockford Hills Center'
+            insidePoly = true
+            startNoti = true
+            showNoti()
+        end
+    else
+        if insidePoly then
+            insidePoly = false
+            showNoti()
+        end
+    end
+end)
+
 -- Polyzones check
-jobCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
+altaStreet:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
     if isPointInside then
         if not insidePoly then
             currentLocation = 'Alta Street Center'
@@ -302,4 +388,20 @@ function stopAnim()
 		StopAnimTask(ped, dict, anim, 1.0)
 		prop = 0
     end
+end
+
+if Config.Blips.Enabled then
+    Citizen.CreateThread(function()
+        for _, info in pairs(Config.Blips.CenterBlips) do
+        info.blip = AddBlipForCoord(info.x, info.y, info.z)
+        SetBlipSprite(info.blip, info.id)
+        SetBlipDisplay(info.blip, 4)
+        SetBlipScale(info.blip, 1.0)
+        SetBlipColour(info.blip, info.colour)
+        SetBlipAsShortRange(info.blip, true)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString(info.title)
+        EndTextCommandSetBlipName(info.blip)
+        end
+    end)
 end
