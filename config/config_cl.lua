@@ -27,9 +27,9 @@ Config.Blips = {
     nearbyDistance = 100, -- How close to change to other one
     blipColor = 1, -- Color of blip https://docs.fivem.net/docs/game-references/blips/
     blipSprite = 1, -- Type of blip
-    blipSize = 1.0, -- Size of blip
+    blipScale = 1.0, -- Size of blip
     blipDisplay = 2, -- https://docs.fivem.net/natives/?_0x9029B2F3DA924928
-    blipRefresh = 1000,
+    blipRefresh = 5000,
     blipLocations = {
         {label = "Jobcenter", coords = vec3(-264.724, -964.472, 31.223)},
         {label = "Jobcenter", coords = vec3(-1044.83, -2749.87, 21.363)},

@@ -48,13 +48,22 @@ end)
 
 if Config.enableBlips then
     CreateThread(function()
+        local ped = PlayerPedId()
         while true do
-            for _, v in pairs(Config.blipLocations) do
-                print(v)
+            local coords = GetEntityCoords(ped)
+            for _, v in pairs(Config.Blips.blipLocations) do
+                local blip = AddBlipForCoords(v.coords)
+                local distance = #(coords - v.coords)
                 if Config.Blips.nearbyBlips then
 
                 else
-
+                    SetBlipDisplay(blip, Config.Blips.blipDisplay)
+                    SetBlipScale(blip, Config.Blips.blipScale)
+                    SetBlipSprite(blip, Config.Blips.blipSprite)
+                    SetBlipColour(blip, Config.Blips.blipColor)
+                    BeginTextCommandSetBlipName("STRING")
+                    AddTextComponentString(v.label)
+                    EndTextCommandSetBlipName(blip)
                 end
             end
             Wait(Config.Blips.blipRefresh)
