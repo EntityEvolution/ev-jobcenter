@@ -5,7 +5,7 @@ local GetStreetNameAtCoord = GetStreetNameAtCoord
 local GetHashKey = GetHashKey
 local CreateThread = CreateThread
 
-local isOpen = false
+local isOpen, isBlipCreated = false, false
 local insidePoly, startNoti = false, false
 local currentLocation = 'None'
 
@@ -50,20 +50,25 @@ if Config.enableBlips then
     CreateThread(function()
         local ped = PlayerPedId()
         while true do
-            local coords = GetEntityCoords(ped)
-            for _, v in pairs(Config.Blips.blipLocations) do
-                local blip = AddBlipForCoords(v.coords)
-                local distance = #(coords - v.coords)
-                if Config.Blips.nearbyBlips then
+            if not blipCreated then
+                local coords = GetEntityCoords(ped)
+                for _, v in pairs(Config.Blips.blipLocations) do
+                    local blip = AddBlipForCoords(v.coords)
+                    local distance = #(coords - v.coords)
+                    if Config.Blips.nearbyBlips then
 
-                else
-                    SetBlipDisplay(blip, Config.Blips.blipDisplay)
-                    SetBlipScale(blip, Config.Blips.blipScale)
-                    SetBlipSprite(blip, Config.Blips.blipSprite)
-                    SetBlipColour(blip, Config.Blips.blipColor)
-                    BeginTextCommandSetBlipName("STRING")
-                    AddTextComponentString(v.label)
-                    EndTextCommandSetBlipName(blip)
+                    else
+                        SetBlipDisplay(blip, Config.Blips.blipDisplay)
+                        SetBlipScale(blip, Config.Blips.blipScale)
+                        SetBlipSprite(blip, Config.Blips.blipSprite)
+                        SetBlipColour(blip, Config.Blips.blipColor)
+                        BeginTextCommandSetBlipName("STRING")
+                        AddTextComponentString(v.label)
+                        EndTextCommandSetBlipName(blip)
+                        if DoesBlipExist(blip) then
+                            isBlipCreated = true
+                        end
+                    end
                 end
             end
             Wait(Config.Blips.blipRefresh)
