@@ -1,4 +1,4 @@
-Config = Config or {}
+Config = {}
 
 -- Opening job center
 Config.openCommand = 'jobcenter'
@@ -20,14 +20,19 @@ Config.tnotifySound = false
 Config.waitSpawn = 3000 -- Set data back in NUI
 Config.waitDate = 1000 -- Update time in the jobcenter date (1000 = 1sec)
 
+-- Blips
+Config.enableBlips = true -- Show blips
 Config.Blips = {
-    enabled = true,
-    CloseBlips = true ,
+    nearbyBlips = true, -- Show only the closest one
+    nearbyDistance = 100, -- How close to change to other one
+    blipColor = 1, -- Color of blip https://docs.fivem.net/docs/game-references/blips/
+    blipSprite = 1, -- Type of blip
+    blipSize = 1.0, -- Size of blip
+    blipDisplay = 2, -- https://docs.fivem.net/natives/?_0x9029B2F3DA924928
     CenterBlips = {
-        {title="Jobcenter", colour=5, id=280,x = -264.724, y = -964.472, z = 31.223},
-        {title="Jobcenter", colour=5, id=280,x = -1044.83, y = -2749.87, z = 21.363},
-        {title="Jobcenter", colour=5, id=280,x = -544.552, y = -205.950, z = 38.091},
-        {title="Jobcenter", colour=5, id=280,x = -248.384, y = 6331.844, z = 32.426}
-
+        {label = "Jobcenter", coords = vec3(-264.724, -964.472, 31.223)},
+        {label = "Jobcenter", coords = vec3(-1044.83, -2749.87, 21.363)},
+        {label = "Jobcenter", coords = vec3(-544.552, -205.950, 38.091)},
+        {label = "Jobcenter", coords = vec3(-248.384, 6331.844, 32.426)}
     }
 }
