@@ -46,6 +46,22 @@ CreateThread(function()
     end
 end)
 
+if Config.enableBlips then
+    CreateThread(function()
+        while true do
+            for _, v in pairs(Config.blipLocations) do
+                print(v)
+                if Config.Blips.nearbyBlips then
+
+                else
+
+                end
+            end
+            Wait(Config.Blips.blipRefresh)
+        end
+    end)
+end
+
 -- Callbacks
 RegisterNUICallback('close', function(_, cb)
     if isOpen then
@@ -175,7 +191,6 @@ aiportCenter:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, po
         end
     end
 end)
-
 
 paletoBlvd:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
     if isPointInside then
@@ -388,20 +403,4 @@ function stopAnim()
 		StopAnimTask(ped, dict, anim, 1.0)
 		prop = 0
     end
-end
-
-if Config.Blips.Enabled then
-    Citizen.CreateThread(function()
-        for _, info in pairs(Config.Blips.CenterBlips) do
-        info.blip = AddBlipForCoord(info.x, info.y, info.z)
-        SetBlipSprite(info.blip, info.id)
-        SetBlipDisplay(info.blip, 4)
-        SetBlipScale(info.blip, 1.0)
-        SetBlipColour(info.blip, info.colour)
-        SetBlipAsShortRange(info.blip, true)
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentString(info.title)
-        EndTextCommandSetBlipName(info.blip)
-        end
-    end)
 end
