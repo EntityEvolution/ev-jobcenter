@@ -50,25 +50,33 @@ if Config.enableBlips then
     CreateThread(function()
         local ped = PlayerPedId()
         while true do
-            if not blipCreated then
+            if not isBlipCreated then
                 local coords = GetEntityCoords(ped)
                 for _, v in pairs(Config.Blips.blipLocations) do
-                    local blip = AddBlipForCoords(v.coords)
                     local distance = #(coords - v.coords)
                     if Config.Blips.nearbyBlips then
-                        if distance <= v.coords then
-                            showBlips(blip)
+                        if distance <= Config.Blips.nearbyDistance then
+                            blip = AddBlipForCoord(v.coords)
+                            SetBlipDisplay(blip, Config.Blips.blipDisplay)
+                            SetBlipScale(blip, Config.Blips.blipScale)
+                            SetBlipSprite(blip, Config.Blips.blipSprite)
+                            SetBlipColour(blip, Config.Blips.blipColor)    
                             BeginTextCommandSetBlipName("STRING")
                             AddTextComponentString(v.label)
                             EndTextCommandSetBlipName(blip)
                             if DoesBlipExist(blip) then
                                 currentBlip = blip
+                                Wait(5000)
                             end
-                        else
+                        elseif distance >= Config.Blips.nearbyDistance then
                             RemoveBlip(currentBlip)
                         end
                     else
-                        showBlips(blip)
+                        blip = AddBlipForCoord(v.coords)
+                        SetBlipDisplay(blip, Config.Blips.blipDisplay)
+                        SetBlipScale(blip, Config.Blips.blipScale)
+                        SetBlipSprite(blip, Config.Blips.blipSprite)
+                        SetBlipColour(blip, Config.Blips.blipColor)
                         BeginTextCommandSetBlipName("STRING")
                         AddTextComponentString(v.label)
                         EndTextCommandSetBlipName(blip)
@@ -392,14 +400,6 @@ end
 function showHelpNotification(message)
     AddTextEntry('HelpNotification', message)
     DisplayHelpTextThisFrame('HelpNotification', false)
-end
-
-function showBlips(blip)
-    SetBlipDisplay(blip, Config.Blips.blipDisplay)
-    SetBlipScale(blip, Config.Blips.blipScale)
-    SetBlipSprite(blip, Config.Blips.blipSprite)
-    SetBlipColour(blip, Config.Blips.blipColor)
-    return
 end
 
 function startAnim()
