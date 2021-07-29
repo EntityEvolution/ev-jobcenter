@@ -15,6 +15,7 @@ window.addEventListener('message', (e) => {
             if (localStorage.getItem('savedBackground') !== undefined) {
                 doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
             }
+            fetchSliders();
             break;
     }
 })

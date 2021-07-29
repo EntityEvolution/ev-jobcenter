@@ -38,6 +38,7 @@ window.addEventListener('load', () => {
             fadeAnim('fadeIn', '1');
             doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground');
             doc.getElementById(Config.devApp).click();
+            fetchSliders();
         }
         apps.click();
     } catch (e) {
@@ -99,6 +100,7 @@ doc.getElementById('whitelist-apps').addEventListener('click', () => {
         whitelist.style.display = 'flex';
         actWhitelist = false;
     }
+    saveId('whitelistBool', actWhitelist);
 });
 
 doc.getElementById('jobs-apps').addEventListener('click', () => {
@@ -109,6 +111,7 @@ doc.getElementById('jobs-apps').addEventListener('click', () => {
         jobs.style.display = 'flex';
         actJobs = false;
     }
+    saveId('jobsBool', actJobs);
 });
 
 doc.getElementById('rules-apps').addEventListener('click', () => {
@@ -119,6 +122,7 @@ doc.getElementById('rules-apps').addEventListener('click', () => {
         rules.style.display = 'flex';
         actRules = false;
     }
+    saveId('rulesBool', actRules);
 });
 
 doc.getElementById('bugs-apps').addEventListener('click', () => {
@@ -129,6 +133,7 @@ doc.getElementById('bugs-apps').addEventListener('click', () => {
         bugs.style.display = 'flex';
         actBugs = false;
     }
+    saveId('bugsBool', actBugs);
 });
 
 // Bugs tab
@@ -186,6 +191,97 @@ jobs.addEventListener('click', () => openTab('jobs', 'tablet-page'));
 
 bugs.addEventListener('click', () => openTab('bugs', 'tablet-page'));
 
+window.addEventListener('load', () => {
+    for (let i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener('click', function() {
+            this.classList.toggle('active');
+            const dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === 'block') {
+                dropdownContent.style.display='none';
+            } else {
+                dropdownContent.style.display='block';
+            }
+        });
+    }
+})
+
+window.addEventListener(`DOMContentLoaded`, () => {
+    fetch(`../json/backgrounds.json`)
+        .then((response) => response.json())
+        .then((data) => {
+            createOptions(data);
+        })
+        .catch((error) => {
+            console.error('Error: ' + error);
+        });
+    fetch(`../json/jobs.json`)
+        .then((response) => response.json())
+        .then((data) => {
+            createJobs(data);
+        })
+        .catch((error) => {
+            console.error('Error: ' + error);
+        });
+})
+
+const fetchNUI = async (cbname, data) => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    };
+    const resp = await fetch(`https://ev-jobcenter/${cbname}`, options);
+    return await resp.json();
+}
+
+const fetchSliders = () => {
+    if (null != getId('whitelistBool')) {
+        actWhitelist = getId('whitelistBool')
+        if (!actWhitelist) {
+            whitelist.style.display = 'flex';
+            doc.getElementById('whitelist-apps').checked = true
+        } else {
+            whitelist.style.display = 'none';
+            doc.getElementById('whitelist-apps').checked = false
+        }
+    }
+
+    if (null != getId('jobsBool')) {
+        actJobs = getId('jobsBool')
+        if (!actJobs) {
+            jobs.style.display = 'flex';
+            doc.getElementById('jobs-apps').checked = true
+        } else {
+            jobs.style.display = 'none';
+            doc.getElementById('jobs-apps').checked = false
+        }
+    }
+
+    if (null != getId('rulesBool')) {
+        actRules = getId('rulesBool')
+        if (!actRules) {
+            rules.style.display = 'flex';
+            doc.getElementById('rules-apps').checked = true
+        } else {
+            rules.style.display = 'none';
+            doc.getElementById('rules-apps').checked = false
+        }
+    }
+    
+    if (null != getId('bugsBool')) {
+        actBugs = getId('bugsBool')
+        if (!actBugs) {
+            bugs.style.display = 'flex';
+            doc.getElementById('bugs-apps').checked = true
+        } else {
+            bugs.style.display = 'none';
+            doc.getElementById('bugs-apps').checked = false
+        }
+    }
+}
+
 function openTab(target, className, settings) {
     let i, tabcontent;
     let id = doc.getElementById(target)
@@ -206,19 +302,6 @@ function openTab(target, className, settings) {
         }
     }
 }
-window.addEventListener('load', () => {
-    for (let i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener('click', function() {
-            this.classList.toggle('active');
-            const dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === 'block') {
-                dropdownContent.style.display='none';
-            } else {
-                dropdownContent.style.display='block';
-            }
-        });
-    }
-})
 
 function fadeAnim(anim, opacity) {
     tablet.style.animation = `${anim} 1s forwards`;
@@ -276,18 +359,6 @@ function progressNoti(message, sec) {
     }
 }
 
-const fetchNUI = async (cbname, data) => {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    const resp = await fetch(`https://ev-jobcenter/${cbname}`, options);
-    return await resp.json();
-}
-
 function wQuestion(data) {
     const acp = doc.getElementById('whitelist-accept');
     const can = doc.getElementById('whitelist-cancel');
@@ -321,25 +392,6 @@ function wQuestion(data) {
         })
     }
 }
-
-window.addEventListener(`DOMContentLoaded`, () => {
-    fetch(`../json/backgrounds.json`)
-        .then((response) => response.json())
-        .then((data) => {
-            createOptions(data);
-        })
-        .catch((error) => {
-            console.error('Error: ' + error);
-        });
-    fetch(`../json/jobs.json`)
-        .then((response) => response.json())
-        .then((data) => {
-            createJobs(data);
-        })
-        .catch((error) => {
-            console.error('Error: ' + error);
-        });
-})
 
 function createJobs(data) {
     const cont = doc.getElementById('jobs-container');
@@ -444,4 +496,13 @@ function createOptions(data) {
         option.value = dataItem.background
         selection.add(option);
     });
+}
+
+function saveId(item, check) {
+    localStorage.setItem(item, check);
+}
+
+function getId(item) {
+    let storage = JSON.parse(localStorage.getItem(item));
+    return storage
 }

@@ -2,7 +2,7 @@ Config = {}
 
 // Dev stuff
 Config.devMode = true
-Config.devApp = 'rules-tab' // jobs|rules|bugs|whitelist - tab
+Config.devApp = 'settings-tab' // jobs|rules|bugs|whitelist - tab
 
 // All Notifications + Their time in sec
 Config.defaultTime = 3
