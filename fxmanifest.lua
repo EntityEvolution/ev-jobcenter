@@ -35,3 +35,5 @@ files {
     'config/config.js',
     'html/js/*.js'
 }
+
+dependency 'PolyZone'
