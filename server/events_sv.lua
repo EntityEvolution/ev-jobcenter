@@ -1,8 +1,6 @@
-stateVrp = GetResourceState('vrp') == 'started'
 stateEsx =  GetResourceState('es_extended') == 'started' or GetResourceState('extendedmode') == 'started'
 stateQbus =  GetResourceState('qb-core') == 'started'
 
-local stateVrp = stateVrp
 local stateEsx = stateEsx
 local stateQbus = stateQbus
 
@@ -11,10 +9,15 @@ if stateEsx then
     TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 end
 
+if stateQbus then
+    QBCore = nil
+    TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+end
+
 RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, webhook, title, message, image, thumbnail, color, location)
     local source <const> = source
-    local xPlayer = ESX.GetPlayerFromId(source)
     if stateEsx then
+        local xPlayer = ESX.GetPlayerFromId(source)
         if xPlayer then
             if whitelisted then
                 if ESX.DoesJobExist(jobName, grade) then
@@ -48,10 +51,36 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, webhook, t
         else
             return print(source)
         end
-    elseif stateVrp then
-
     elseif stateQbus then
-
+        if whitelisted then
+            if checkJob then
+                if xPlayer.getJob().name ~= jobName then
+                    if title == nil then title = 'Not Found' end
+                    if message == nil then message = 'None' end
+                    sendDiscord(webhook,
+                    '**Job Center Information | ' .. title .. '**',
+                    "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
+                    "```\n __Job Information__\n```Character Name: " .. xPlayer.getName() .. "\nCharacter Job: " .. xPlayer.getJob().label ..
+                    "\nCharacter Job Rank: " .. xPlayer.getJob().grade_label .. "\nCharacter Sex: "
+                    .. xPlayer.get('sex') .. "\nCharacter DOB: " .. xPlayer.get('dateofbirth') .. "\nCharacter Height: " .. xPlayer.get('height') ..
+                    "in```" .. "\n __About__\n```Reason: " .. message .. "\nLocation: " .. location .. "```",
+                    image,
+                    thumbnail,
+                    color)
+                    return
+                else
+                    return
+                end
+            else
+                if ESX.DoesJobExist(jobName, grade) then
+                    if xPlayer.getJob().name ~= jobName then
+                        xPlayer.setJob(jobName, grade)
+                    else
+                        return print(source .. ' already has the job')
+                    end
+                end
+            end
+        end
     else
         return print('No framework found')
     end
@@ -71,9 +100,6 @@ RegisterNetEvent('ev:sendAllAdmins', function(prevent, location)
                       })                      
                 end
             end
-        elseif stateVrp then
-
-            return
         elseif stateQbus then
 
             return

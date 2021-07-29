@@ -23,7 +23,7 @@ Config.waitDate = 1000 -- Update time in the jobcenter date (1000 = 1sec)
 -- Blips
 Config.enableBlips = true -- Show blips
 Config.Blips = {
-    nearbyBlips = true, -- Show only the closest one
+    nearbyBlips = false, -- Show only the closest one
     nearbyDistance = 300, -- How close to change to other one
     blipColor = 1, -- Color of blip https://docs.fivem.net/docs/game-references/blips/
     blipSprite = 1, -- Type of blip

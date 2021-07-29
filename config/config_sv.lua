@@ -15,11 +15,6 @@ Config.esxRanks = {
     'admin'
 }
 
--- VRP Ranks
-Config.vrpRanks = {
-    'admin'
-}
-
 -- QBUS Ranks
 Config.qbusRanks = {
     'admin'
