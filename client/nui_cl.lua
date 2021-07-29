@@ -7,7 +7,7 @@ local CreateThread = CreateThread
 
 local isOpen, isBlipCreated = false, false
 local insidePoly, startNoti = false, false
-local currentLocation = 'None'
+local currentLocation, currentBlip = 'None'
 
 local dict, anim = 'amb@world_human_seat_wall_tablet@female@base', 'base'
 
@@ -56,12 +56,19 @@ if Config.enableBlips then
                     local blip = AddBlipForCoords(v.coords)
                     local distance = #(coords - v.coords)
                     if Config.Blips.nearbyBlips then
-
+                        if distance <= v.coords then
+                            showBlips(blip)
+                            BeginTextCommandSetBlipName("STRING")
+                            AddTextComponentString(v.label)
+                            EndTextCommandSetBlipName(blip)
+                            if DoesBlipExist(blip) then
+                                currentBlip = blip
+                            end
+                        else
+                            RemoveBlip(currentBlip)
+                        end
                     else
-                        SetBlipDisplay(blip, Config.Blips.blipDisplay)
-                        SetBlipScale(blip, Config.Blips.blipScale)
-                        SetBlipSprite(blip, Config.Blips.blipSprite)
-                        SetBlipColour(blip, Config.Blips.blipColor)
+                        showBlips(blip)
                         BeginTextCommandSetBlipName("STRING")
                         AddTextComponentString(v.label)
                         EndTextCommandSetBlipName(blip)
@@ -385,6 +392,14 @@ end
 function showHelpNotification(message)
     AddTextEntry('HelpNotification', message)
     DisplayHelpTextThisFrame('HelpNotification', false)
+end
+
+function showBlips(blip)
+    SetBlipDisplay(blip, Config.Blips.blipDisplay)
+    SetBlipScale(blip, Config.Blips.blipScale)
+    SetBlipSprite(blip, Config.Blips.blipSprite)
+    SetBlipColour(blip, Config.Blips.blipColor)
+    return
 end
 
 function startAnim()
