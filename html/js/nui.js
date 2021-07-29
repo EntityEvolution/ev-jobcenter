@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
             console.log('Started jobcenter');
             fadeAnim('fadeIn', '1');
             doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground');
-            whitelist.click();
+            doc.getElementById(Config.devApp).click();
         }
         apps.click();
     } catch (e) {

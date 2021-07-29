@@ -1,5 +1,6 @@
 Config = {}
-Config.devMode = false
+Config.devMode = true
+Config.devApp = 'rules-tab'
 
 // All Notifications + Their time in sec
 Config.defaultTime = 3
