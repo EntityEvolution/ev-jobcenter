@@ -12,7 +12,7 @@ window.addEventListener('message', (e) => {
             break;
 
         case 'restoreData':
-            if (localStorage.getItem('savedBackground') !== undefined) {
+            if (null != localStorage.getItem('savedBackground')) {
                 doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
             }
             fetchSliders();

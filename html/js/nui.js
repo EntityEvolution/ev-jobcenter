@@ -36,9 +36,14 @@ window.addEventListener('load', () => {
         if (Config.devMode) {
             console.log('Started jobcenter');
             fadeAnim('fadeIn', '1');
-            doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground');
             doc.getElementById(Config.devApp).click();
             fetchSliders();
+            if (null != localStorage.getItem('savedBackground')) {
+                doc.getElementById('tablet-background').src = localStorage.getItem('savedBackground')
+            }
+            if (Config.devClearStorage) {
+                this.window.localStorage.clear();
+            }
         }
         apps.click();
     } catch (e) {
