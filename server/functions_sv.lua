@@ -1,5 +1,6 @@
 local stateEsx = stateEsx
 local stateVrp = stateVrp
+local stateQbus = stateQbus
 
 function checkPerms(xPlayer)
 	local group = xPlayer.getGroup()

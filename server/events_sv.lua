@@ -1,14 +1,15 @@
 stateVrp = GetResourceState('vrp') == 'started'
 stateEsx =  GetResourceState('es_extended') == 'started' or GetResourceState('extendedmode') == 'started'
+stateQbus =  GetResourceState('qb-core') == 'started'
 
 local stateVrp = stateVrp
 local stateEsx = stateEsx
+local stateQbus = stateQbus
 
 if stateEsx then
     ESX = nil
     TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 end
-
 
 RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, webhook, title, message, image, thumbnail, color, location)
     local source <const> = source
@@ -49,6 +50,8 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, webhook, t
         end
     elseif stateVrp then
 
+    elseif stateQbus then
+
     else
         return print('No framework found')
     end
@@ -69,6 +72,9 @@ RegisterNetEvent('ev:sendAllAdmins', function(prevent, location)
                 end
             end
         elseif stateVrp then
+
+            return
+        elseif stateQbus then
 
             return
         else
