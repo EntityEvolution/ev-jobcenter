@@ -18,7 +18,7 @@ This project does not contain a license, therefore you are not allowed to add on
 4) Start your server.
 
 ### Features
-- Automatically find your framework (ESX, VRP, QB)
+- Automatically find your framework (ESX, QB)
 - Easy to create jobs with or without whitelist.
 - Easy to create backgrounds.
 - Rules page.
