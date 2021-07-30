@@ -4,7 +4,7 @@ game 'gta5'
 
 lua54 'yes'
 
-description 'A simple job center created by Entity Evolution'
+description 'First version of a new release of a job center with a beautifull ui , builded by entity evolution devs team'
 
 version '1.0.0'
 
