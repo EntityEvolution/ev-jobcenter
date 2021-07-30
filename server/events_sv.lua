@@ -52,33 +52,30 @@ RegisterNetEvent('ev:applyJob', function(whitelisted, jobName, grade, webhook, t
             return print(source)
         end
     elseif stateQbus then
+        local xPlayer = QBCore.Functions.GetPlayer(source)
         if whitelisted then
-            if checkJob then
-                if xPlayer.getJob().name ~= jobName then
-                    if title == nil then title = 'Not Found' end
-                    if message == nil then message = 'None' end
-                    sendDiscord(webhook,
-                    '**Job Center Information | ' .. title .. '**',
-                    "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
-                    "```\n __Job Information__\n```Character Name: " .. xPlayer.getName() .. "\nCharacter Job: " .. xPlayer.getJob().label ..
-                    "\nCharacter Job Rank: " .. xPlayer.getJob().grade_label .. "\nCharacter Sex: "
-                    .. xPlayer.get('sex') .. "\nCharacter DOB: " .. xPlayer.get('dateofbirth') .. "\nCharacter Height: " .. xPlayer.get('height') ..
-                    "in```" .. "\n __About__\n```Reason: " .. message .. "\nLocation: " .. location .. "```",
-                    image,
-                    thumbnail,
-                    color)
-                    return
-                else
-                    return
-                end
+            if xPlayer.PlayerData.job.name ~= jobName then
+                if title == nil then title = 'Not Found' end
+                if message == nil then message = 'None' end
+                sendDiscord(webhook,
+                '**Job Center Information | ' .. title .. '**',
+                "__Player Information__\n ```Player ID: " .. source .. "\nPlayer Name: " .. GetPlayerName(source) ..
+                "```\n __Job Information__\n```Character Name: " .. xPlayer.PlayerData.charinfo.firstname .. xPlayer.PlayerData.charinfo.lastname .. "\nCharacter Job: " .. xPlayer.PlayerData.job.label ..
+                "\nCharacter Job Rank: " .. xPlayer.PlayerData.job.grade.name .. "\nCharacter Sex: "
+                .. xPlayer.PlayerData.charinfo.gender .. "\nCharacter DOB: " .. xPlayer.PlayerData.charinfo.birthdate .. "\nNationality: " .. xPlayer.PlayerData.charinfo.nationality ..
+                "```" .. "\n __About__\n```Reason: " .. message .. "\nLocation: " .. location .. "```",
+                image,
+                thumbnail,
+                color)
+                return
             else
-                if ESX.DoesJobExist(jobName, grade) then
-                    if xPlayer.getJob().name ~= jobName then
-                        xPlayer.setJob(jobName, grade)
-                    else
-                        return print(source .. ' already has the job')
-                    end
-                end
+                return print(source .. 'already has the job' .. jobName)
+            end
+        else
+            if xPlayer.PlayerData.job.name ~= jobName then
+                xPlayer.Functions.SetJob(jobName, grade)
+            else
+                return print(source .. 'already has the job' .. jobName)
             end
         end
     else
@@ -97,12 +94,23 @@ RegisterNetEvent('ev:sendAllAdmins', function(prevent, location)
                         color = { 255, 0, 0},
                         multiline = true,
                         args = {"Job Center Help", "The id " .. source .. " requested help at the job center named: " .. location}
-                      })                      
+                    })   
+                    return                   
                 end
             end
         elseif stateQbus then
-
-            return
+            local xPlayers = QBCore.Functions.GetPlayers()
+            for i=1, #xPlayers, 1 do
+                local xPlayer = QBCore.Functions.GetPlayer(xPlayers[i])
+                if checkPerms(xPlayer) then
+                    TriggerClientEvent('chat:addMessage', xPlayers[i], {
+                        color = { 255, 0, 0},
+                        multiline = true,
+                        args = {"Job Center Help", "The id " .. source .. " requested help at the job center named: " .. location}
+                    })   
+                    return                   
+                end
+            end
         else
             return print('No framework found')
         end

@@ -17,5 +17,6 @@ Config.esxRanks = {
 
 -- QBUS Ranks
 Config.qbusRanks = {
+    'god',
     'admin'
 }
