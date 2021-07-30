@@ -6,7 +6,7 @@ lua54 'yes'
 
 description 'A simple job center created by Entity Evolution'
 
-version '0.0.1'
+version '1.0.0'
 
 client_scripts {
     'config/config_cl.lua',
