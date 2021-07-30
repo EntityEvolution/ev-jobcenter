@@ -6,7 +6,7 @@ lua54 'yes'
 
 description 'First version of a new release of a job center with a beautifull ui , builded by entity evolution devs team'
 
-version '1.0.0'
+version '0.0.1'
 
 client_scripts {
     'config/config_cl.lua',
