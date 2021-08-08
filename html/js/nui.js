@@ -367,23 +367,18 @@ function progressNoti(message, sec) {
 function wQuestion(data) {
     const acp = doc.getElementById('whitelist-accept');
     const can = doc.getElementById('whitelist-cancel');
-
-    if (acp.getAttribute('listener') !== 'true') {
-        doc.getElementById('whitelist-accept').addEventListener('click', (e)=> {
-            const elementClicked = e.target;
-            elementClicked.setAttribute('listener', 'true');
-            const q = doc.getElementById('whitelist-val').value
-            if (!q) {
-                progressNoti(Config.WhitelistNoMessage, Config.WhitelistNoMessageTime)
-            } else {
-                progressNoti(Config.WhitelistMessage, Config.WhitelistMessageTime)
-                wquest.style.opacity = '0';
-                setTimeout(function() {
-                    wquest.style.display='none';
-                }, 600)
-                fetchNUI('sendFormData', {whitelisted: JSON.parse(data.whitelist), job: data.job, grade: data.grade, webhook: data.discordWebhook, title: data.imageTitle, message: q, image: data.discordImage, thumbnail: data.discordThumbnail, color: data.discordColor})
-            }
-        })
+    acp.onclick = () => {
+        let q = doc.getElementById('whitelist-val').value
+        if (!q) {
+            progressNoti(Config.WhitelistNoMessage, Config.WhitelistNoMessageTime)
+        } else {
+            progressNoti(Config.WhitelistMessage, Config.WhitelistMessageTime)
+            wquest.style.opacity = '0';
+            setTimeout(function() {
+                wquest.style.display='none';
+            }, 600)
+            fetchNUI('sendFormData', {whitelisted: JSON.parse(data.whitelist), job: data.job, grade: data.grade, webhook: data.discordWebhook, title: data.imageTitle, message: q, image: data.discordImage, thumbnail: data.discordThumbnail, color: data.discordColor})
+        }
     }
 
     if (can.getAttribute('listener') !== 'true') {
