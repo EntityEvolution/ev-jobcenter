@@ -12,12 +12,6 @@ local currentLocation, currentBlip = 'None'
 local dict, anim = 'amb@world_human_seat_wall_tablet@female@base', 'base'
 
 CreateThread(function()
-    while isOpen do
-        DisableControlAction(0, 322, true)
-    end
-end)
-
-CreateThread(function()
     while true do
         if isOpen then
             local min, hours, day, month, dayText = GetClockMinutes(), GetClockHours(), GetClockDayOfMonth(), getMonthText(), getDayText()
